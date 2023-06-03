@@ -12,7 +12,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
     <!-- Styles -->
-    <style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- <style>
         /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
         *,
         ::after,
@@ -827,26 +828,36 @@
                 padding: 2rem
             }
         }
-    </style>
+    </style> -->
 </head>
 
 <body class="antialiased">
-        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+        <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white bg-cover bg-[url('C:\AdminAPP\resources\views\eleve.jpg')]">
             @if (Route::has('login'))
-                <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                <div class=" sm:fixed sm:top-0 sm:right-0 p-10 text-right z-10">
                     @auth
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Connexion</a>
+                        <a href="{{ route('login') }}" class=" hover:bg-green-400 pl-3 pr-3 pt-2 pb-2 rounded font-bold border border-black">Connexion</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Inscription</a>
+                            <a href="{{ route('register') }}" class="bg-blue-700 hover:bg-blue-500 pl-3 pr-3 pt-2 pb-2 rounded font-bold border border-black">Inscription</a>
                         @endif
                     @endauth
                 </div>
             @endif
 
-
+            <div class="container pt-40">
+                <h1 class="text-white text-6xl font-black text-center mb-10 px-60 ">Developper vos competences chez nous...</h1>
+                <h2 class=" text-white text-2xl font-bold text-center mb-2 px-60 uppercase">+ de 30 formations disponibles </h2>
+                <div class=" container-bot  text-center px-60 pb-20 font-bold text-white lowercase">
+                    <p>Vous souhaitez acquérir des connaissances professionnelles dans le domaine des technologies de l'information, qui évolue rapidement ? AdminAPP propose une grande variété de cours en ligne pour tous ceux qui souhaitent entrer dans le monde des technologies de l'information.</p>
+                </div>
+                <div class="but-container text-center mt-2 ">
+                    <button type="button" class="bg-cover animate-bounce p-10 bg-[url('C:\AdminAPP\resources\views\vers-le-bas.png')]"></button>
+                </div>
+            </div>
+            
         </div>
     </body>
 
