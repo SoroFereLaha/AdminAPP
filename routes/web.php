@@ -28,4 +28,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Admin/UsersController ne fonctionnait pas, <<class does not exist>> alors que la class existe. Alors jai du mettre le chemin complet
+//Route::resource('/admin/users', 'App\Http\Controllers\Admin\UsersController');
+
+Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
+    Route::resource('users', 'UsersController');
+});
+
 require __DIR__.'/auth.php';
