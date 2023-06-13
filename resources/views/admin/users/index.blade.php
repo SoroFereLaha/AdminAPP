@@ -20,6 +20,7 @@
                                         <th scope="col" class="px-6 py-4">#</th>
                                         <th scope="col" class="px-6 py-4">Nom</th>
                                         <th scope="col" class="px-6 py-4">Email</th>
+                                        <th scope="col" class="px-6 py-4">Rôle</th>
                                         <th scope="col" class="px-6 py-4">Action</th>
                                         </tr>
                                     </thead>
@@ -32,18 +33,22 @@
                                             <td class="whitespace-nowrap px-6 py-4">{{$user->name}}</td>
                                             <td class="whitespace-nowrap px-6 py-4">{{$user->email}}</td>
                                             <!--il n'a pas de role dans la table users c'est plutot dans la table roles or la varibale roles n'est pas defini dans le controller il me faut cree un RolesController comme pour le UsersController-->
-                                            <td class="whitespace-nowrap px-6 py-4">{{$user->role}}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                                             <td>
                                                 <a href="{{ route('admin.users.edit', $user->id) }}">
                                                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                                         Editer
                                                     </button>
                                                 </a>
-                                                <a href="{{ route('admin.users.destroy', $user->id) }}">
-                                                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                        Supprimer
-                                                    </button>
-                                                </a>
+                                                <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="display: inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="{{ route('admin.users.destroy', $user->id) }}">
+                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                                            Supprimer
+                                                        </button>
+                                                    </a>
+                                                </form>
                                             </td>
                                         </tr>
 
