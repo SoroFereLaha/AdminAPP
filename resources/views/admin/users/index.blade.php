@@ -1,9 +1,12 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Listes des utilisateurs') }}
-        </h2>
-    </x-slot>
+
+        <x-slot name="header">
+            @can('manage-users')
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __(' Listes des utilisateurs ') }}
+            </h2>
+            @endcan
+        </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -21,7 +24,10 @@
                                         <th scope="col" class="px-6 py-4">Nom</th>
                                         <th scope="col" class="px-6 py-4">Email</th>
                                         <th scope="col" class="px-6 py-4">Rôle</th>
+                                        <!--seul l'admin peut delete-user donc lui seul verra ca-->
+                                        @can('delete-users')
                                         <th scope="col" class="px-6 py-4">Action</th>
+                                        @endcan
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -35,11 +41,14 @@
                                             <!--il n'a pas de role dans la table users c'est plutot dans la table roles or la varibale roles n'est pas defini dans le controller il me faut cree un RolesController comme pour le UsersController-->
                                             <td class="whitespace-nowrap px-6 py-4">{{ implode(', ', $user->roles()->get()->pluck('name')->toArray()) }}</td>
                                             <td>
+                                                @can('edit-users')
                                                 <a href="{{ route('admin.users.edit', $user->id) }}">
                                                     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                                         Editer
                                                     </button>
                                                 </a>
+                                                @endcan
+                                                @can('delete-users')
                                                 <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="display: inline">
                                                     @csrf
                                                     @method('DELETE')
@@ -49,6 +58,7 @@
                                                         </button>
                                                     </a>
                                                 </form>
+                                                @endcan
                                             </td>
                                         </tr>
 

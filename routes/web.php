@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 // Admin/UsersController ne fonctionnait pas, <<class does not exist>> alors que la class existe. Alors jai du mettre le chemin complet
 //Route::resource('/admin/users', 'App\Http\Controllers\Admin\UsersController');
 
-Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->group(function(){
+Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('users', 'UsersController');
 });
 
