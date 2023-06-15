@@ -13,6 +13,19 @@
                     <form action="{{ route('admin.users.update', $user) }}" method="POST">
                         @csrf    
                         @method('PATCH')
+
+                        <div>
+                            <x-input-label for="name" :value="__('Nom')" />
+                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name') ?? $user->name" required autofocus autocomplete="username" />
+                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                        </div>
+
+                        <div>
+                            <x-input-label for="email" :value="__('Email')" />
+                            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email') ?? $user->email" required autofocus autocomplete="username" />
+                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                        </div>
+                        </br>
                         @foreach ($roles as $role)
 
                             <div class="flex items-center mb-4">
@@ -21,7 +34,7 @@
                             </div>
 
                         @endforeach
-                        <button type="submit" class="bg-blue-500 p-1 rounded-md ">Modifier les rôles</button>
+                        <button type="submit" class="bg-blue-500 p-1 rounded-md ">Modifier les informations</button>
                     </form>
 
                 </div>
