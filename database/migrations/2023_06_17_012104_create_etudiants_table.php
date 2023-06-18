@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('prenom');
             $table->integer('age');
             $table->string('genre');
+            // Clé étrangère pour la référence au professeur
+            $table->unsignedBigInteger('prof_id')->nullable();
             $table->timestamps();
+            $table->foreign('prof_id')->references('id')->on('profs')->onDelete('set null');
         });
     }
 

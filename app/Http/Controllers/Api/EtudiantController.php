@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateEtudiantRequest;
 use App\Http\Requests\EditEtudiantRequest;
 use App\Models\Etudiant;
+use App\Models\Prof;
 use Illuminate\Http\Request;
 
 class EtudiantController extends Controller
@@ -33,12 +34,29 @@ class EtudiantController extends Controller
 
 
         try {
+
+            $prof = Prof::find($request->prof_id);
+
+            if (!$prof) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'Le professeur spécifié n\'existe pas.',
+                    'data' => null
+                ], 404);
+            }
+
+
+
             $post = new Etudiant();
             $post->nom = $request->nom;
             $post->prenom = $request->prenom;
             $post->age = $request->age;
             $post->genre = $request->genre;
+            $post->prof_id = $request->prof_id;
+
             $post->save();
+
+            $prof->students()->attach($post);
 
             return response()->json([
                 'status_code' => 200,
@@ -57,10 +75,32 @@ class EtudiantController extends Controller
 
         try {
 
+            $prof = Prof::find($request->prof_id);
+
+            if (!$prof) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'Le professeur spécifié n\'existe pas.',
+                    'data' => null
+                ], 404);
+            }
+
             $post = Etudiant::find($request->id);
             $post->nom = $request->nom;
             $post->prenom = $request->prenom;
             $post->age = $request->age;
+            $post->genre = $request->genre;
+            $post->prof_id = $request->prof_id;
+
+            if ($post->genre != 'M' && $post->genre != 'F') {
+
+                return response()->json([
+                    // 'status_code' => 200,
+                    'status_message' => 'le genre doit etre M ou F',
+                    // 'data' => $post
+
+                ]);
+            }
             $post->save();
 
             return response()->json([
@@ -93,5 +133,4 @@ class EtudiantController extends Controller
             return response()->json($e);
         }
     }
-
 }

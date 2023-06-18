@@ -15,10 +15,12 @@ class ProfController extends Controller
     {
         try {
 
+            $profs = Prof::with('students')->get();
+
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'les profs on été récupérés',
-                'data' => Prof::all()
+                'data' => $profs
 
             ]);
         } catch (Exception $e) {

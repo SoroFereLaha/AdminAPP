@@ -39,7 +39,7 @@ Route::delete('prof/{post}', [ProfController::class, 'delete']);
 
 route::get('etudiant', [EtudiantController::class, 'index']);
 Route::post('etudiant/create', [EtudiantController::class, 'store']);
-Route::put('etudiant/edite/{id}', [EtudiantController::class, 'update']);
+Route::put('etudiant/edit/{id}', [EtudiantController::class, 'update']);
 Route::delete('etudiant/{post}', [EtudiantController::class, 'delete']);
 
 
