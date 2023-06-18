@@ -832,7 +832,7 @@
 </head>
 
 <body class="antialiased">
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white bg-cover bg-[url('C:\AdminAPP\resources\views\adminapp_image\eleve.jpg')]">
+    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white bg-cover bg-[url('C:\AdminAPP\public\adminapp_image\eleve.jpg')]">
         @if (Route::has('login'))
             <div class=" sm:fixed sm:top-0 sm:right-0 p-10 text-right z-10">
                 @auth
@@ -860,7 +860,7 @@
     </div>
     <div class=" bg-yellow-200 " id="scroll">
 
-        <img src="C:\AdminAPP\resources\views\adminapp_image\female.jpg" alt="image de IMAGE">
+        <img src="adminapp_image/female.jpg" alt="image de IMAGEs">
 
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum voluptas reprehenderit aliquam? Quis praesentium libero quia aperiam impedit non, eum recusandae magni facilis quasi quisquam nemo? Quam eos voluptatibus facilis nesciunt nemo in culpa blanditiis rem deleniti ratione excepturi, magni soluta voluptas obcaecati, saepe, deserunt laborum! Mollitia delectus consequuntur libero, eius fuga esse autem, vitae quas facere odio, iste praesentium illo corporis. Autem doloremque, totam, quas dolor animi voluptatibus ad inventore quaerat reprehenderit facilis consequatur ipsa, alias tempora minima! Minus sunt consectetur sint eum quia. Aut voluptates quo, perspiciatis at doloribus ad saepe porro aspernatur pariatur, deserunt rem nostrum et.  
     </div>
