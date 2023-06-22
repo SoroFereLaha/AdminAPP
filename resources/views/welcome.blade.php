@@ -858,12 +858,138 @@
             </div>
         </div>
     </div>
-    <div class=" bg-yellow-200 " id="scroll">
 
-        <img src="adminapp_image/female.jpg" alt="image de IMAGEs">
+    <div class=" bg-gray-250 justify-between" height="" id="scroll">
 
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum voluptas reprehenderit aliquam? Quis praesentium libero quia aperiam impedit non, eum recusandae magni facilis quasi quisquam nemo? Quam eos voluptatibus facilis nesciunt nemo in culpa blanditiis rem deleniti ratione excepturi, magni soluta voluptas obcaecati, saepe, deserunt laborum! Mollitia delectus consequuntur libero, eius fuga esse autem, vitae quas facere odio, iste praesentium illo corporis. Autem doloremque, totam, quas dolor animi voluptatibus ad inventore quaerat reprehenderit facilis consequatur ipsa, alias tempora minima! Minus sunt consectetur sint eum quia. Aut voluptates quo, perspiciatis at doloribus ad saepe porro aspernatur pariatur, deserunt rem nostrum et.  
-    </div>
+        <img src="adminapp_image/female.jpg" width="356" height="453" alt="image d'une femme" class="float-left m-20">
         
+        <div class="py-20 pr-20">
+
+        <h2 class="p-20 text-4xl font-bold">Un petit mot du directeur</h2>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nostrum voluptas reprehenderit aliquam? Quis praesentium libero quia aperiam impedit non, eum recusandae magni facilis quasi quisquam nemo? Quam eos voluptatibus facilis nesciunt nemo in culpa blanditiis rem deleniti ratione excepturi, magni soluta voluptas obcaecati, saepe, deserunt laborum! Mollitia delectus consequuntur libero, eius fuga esse autem, vitae quas facere odio, iste praesentium illo corporis. Autem doloremque, totam, quas dolor animi voluptatibus ad inventore quaerat reprehenderit facilis consequatur ipsa, alias tempora minima! Minus sunt consectetur sint eum quia. Aut voluptates quo, perspiciatis at doloribus ad saepe porro aspernatur pariatur, deserunt rem nostrum et.
+        </div>
+
+        <div class="clear-left"></div>
+         
+    </div>
+
+    
+    
+    <div class="big-container bg-blue-50 p-10 text-upper font-bold">
+
+        <h2 class="text-center text-5xl">Profitez de nos cours !</h2>
+
+        <div class="contianer grid grid-cols-3 gap-3 bg-blue-50 p-20">
+
+            <div class="max-w-sm bg-white  shadow dark:bg-white dark:border-gray-700">
+                <a href="#">
+                    <img class="p-5" src="adminapp_image/cuisine1.jpg" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Cuisine</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-500">Éveillez vos papilles avec nos cours de cuisine ! Apprenez, créez et dégustez des plats délicieux.</p><br>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="max-w-sm bg-white  shadow dark:bg-white dark:border-gray-700">
+                <a href="#">
+                    <img class="p-5" src="adminapp_image/cuisine.jpg" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Pâtisserie </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-500">Explorez l'univers sucré avec nos cours de pâtisserie ! Maîtrisez les techniques et délectez-vous de créations sucrées.</p><br>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="max-w-sm bg-white  shadow dark:bg-white dark:border-gray-700">
+                <a href="#">
+                    <img class="p-5" src="adminapp_image/informatique.jpg" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Informatique </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-500">Développez vos compétences informatiques avec nos cours spécialisés ! Apprenez, programmez et maîtrisez les nouvelles technologies.</p>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="max-w-sm bg-white  shadow dark:bg-white dark:border-gray-700">
+                <a href="#">
+                    <img class="p-5" src="adminapp_image/be.jpg" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Beauté et Esthétique </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-500">Révélez votre beauté avec nos cours d'esthétique ! Apprenez les techniques de soins, de maquillage et de bien-être.</p><br>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="max-w-sm bg-white  shadow dark:bg-white dark:border-gray-700">
+                <a href="#">
+                    <img class="p-5" src="adminapp_image/couture.jpg" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Couture </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-500">Exprimez votre créativité avec nos cours de couture ! Apprenez à concevoir et à réaliser vos propres vêtements uniques.</p><br>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="max-w-sm bg-white  shadow dark:bg-white dark:border-gray-700">
+                <a href="#">
+                    <img class="p-5" src="adminapp_image/cf.jpg" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Coiffure femme </h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-500">Révélez votre talent dans l'univers de la coiffure féminine ! Apprenez les techniques de coupe, de coloration et de styling pour sublimer toutes les femmes. </p>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="max-w-sm bg-white  shadow dark:bg-white dark:border-gray-700">
+                <a href="#">
+                    <img class="p-5" src="adminapp_image/ch1.jpg" alt="" />
+                </a>
+                <div class="p-5">
+                    <a href="#">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Coiffure homme</h5>
+                    </a>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-500">Maîtrisez l'art de la coiffure masculine avec nos cours spécialisés ! Apprenez les techniques de coupe, de coiffage et de soins capillaires pour hommes.</p><br>
+                    <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-blue-800">
+                        Read more
+                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 </body>
 </html>
