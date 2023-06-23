@@ -854,7 +854,7 @@
                 <p>Vous souhaitez acquérir des connaissances professionnelles dans le domaine des technologies de l'information, qui évolue rapidement ? AdminAPP propose une grande variété de cours en ligne pour tous ceux qui souhaitent entrer dans le monde des technologies de l'information.</p>
             </div>
             <div class="but-container text-center mt-2 ">
-                <a type="button" href="#scroll" class="bg-cover animate-bounce p-10 bg-[url('C:\AdminAPP\resources\views\adminapp_image\vers-le-bas.png')]"></a>
+                <a type="button" href="#scroll" class="bg-cover animate-bounce p-10 bg-[url('C:\AdminAPP\public\adminapp_image\vers-le-bas.png')]"></a>
             </div>
         </div>
     </div>

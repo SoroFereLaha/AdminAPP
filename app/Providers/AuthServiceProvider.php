@@ -24,15 +24,16 @@ class AuthServiceProvider extends ServiceProvider
         //$this->registerPolicies();
 
         Gate::define('manage-users', function($user) {
-            return $user->hasAnyRole(['professeur', 'admin']);
+            //dans la fonction hasanyrole on a dit que le parametre est un tableau
+            return $user->hasAnyRole(['','administrateur principal']);
         }); 
 
         Gate::define('edit-users', function ($user) {
-            return $user->isAdmin();
+            return $user->isAdminPrincipal();
         });
 
         Gate::define('delete-users', function ($user) {
-            return $user->isAdmin();
+            return $user->isAdminPrincipal();
         });
     }
 }

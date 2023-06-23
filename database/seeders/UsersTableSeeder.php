@@ -20,9 +20,9 @@ class UsersTableSeeder extends Seeder
         User::truncate();
         DB::table('role_user')->truncate();
 
-        $admin = user::create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
+        $admin_principal = user::create([
+            'name' => 'administrateur principal',
+            'email' => 'admin_principal@adminprincipal.com',
             'password' => Hash::make('password')
         ]);
 
@@ -38,13 +38,45 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
 
-        $adminRole = Role::where('name', 'admin')->first();
+        $comptable = user::create([
+            'name' => 'comptable',
+            'email' => 'comptable@comptable.com',
+            'password' => Hash::make('password')
+        ]);
+
+        $secretaire = user::create([
+            'name' => 'secretaire',
+            'email' => 'secretaire@secretaire.com',
+            'password' => Hash::make('password')
+        ]);
+
+        $admin_general = user::create([
+            'name' => 'administrateur general',
+            'email' => 'admin_general@admingeneral.com',
+            'password' => Hash::make('password')
+        ]);
+
+        $utilisateur = user::create([
+            'name' => 'utilisateur',
+            'email' => 'utilisateur@utilisateur.com',
+            'password' => Hash::make('password')
+        ]);
+
+        $admin_principalRole = Role::where('name', 'administrateur principal')->first();
         $professeurRole = Role::where('name', 'professeur')->first();
         $etudiantRole = Role::where('name', 'etudiant')->first();
-
-        $admin->roles()->attach($adminRole);
+        $comptableRole = Role::where('name', 'comptable')->first();
+        $secretaireRole = Role::where('name', 'secretaire')->first();
+        $admin_generalRole = Role::where('name', 'administrateur general')->first();
+        $utilisateurRole = Role::where('name', 'utilisateur')->first();
+        
+        $admin_principal->roles()->attach($admin_principalRole);
         $professeur->roles()->attach($professeurRole);
         $etudiant->roles()->attach($etudiantRole);
+        $comptable->roles()->attach($comptableRole);
+        $secretaire->roles()->attach($secretaireRole);
+        $admin_general->roles()->attach($admin_generalRole);
+        $utilisateur->roles()->attach($utilisateurRole);
 
     }
 }

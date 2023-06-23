@@ -48,8 +48,32 @@ class User extends Authenticatable
     }
 
     //verifier si un utilisateur est administrateur ou non
-    public function isAdmin(){
-        return $this->roles()->where('name', 'admin')->first();
+    public function isAdminPrincipal(){
+        return $this->roles()->where('name', 'administrateur principal')->first();
+    }
+
+    public function isAdminGeneral(){
+        return $this->roles()->where('name', 'administrateur general')->first();
+    }
+
+    public function isEtudiant(){
+        return $this->roles()->where('name', 'etudiant')->first();
+    }
+
+    public function isProfesseur(){
+        return $this->roles()->where('name', 'professeur')->first();
+    }
+
+    public function isComptable(){
+        return $this->roles()->where('name', 'comptable')->first();
+    }
+
+    public function isSecretaire(){
+        return $this->roles()->where('name', 'secretaire')->first();
+    }
+
+    public function isUtilisateur(){
+        return $this->roles()->where('name', 'utilisateur')->first();
     }
 
     public function hasAnyRole(array $roles){
