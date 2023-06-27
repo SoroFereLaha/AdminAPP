@@ -27,6 +27,10 @@ class AuthServiceProvider extends ServiceProvider
             //dans la fonction hasanyrole on a dit que le parametre est un tableau
             return $user->hasAnyRole(['','administrateur principal']);
         }); 
+        Gate::define('isNotAdmin', function($user) {
+            //dans la fonction hasanyrole on a dit que le parametre est un tableau
+            return $user->hasAnyRole(['etudiant','administrateur general', 'secretaire', 'comptable', 'professeur', 'utilisateur']);
+        }); 
 
         Gate::define('edit-users', function ($user) {
             return $user->isAdminPrincipal();
