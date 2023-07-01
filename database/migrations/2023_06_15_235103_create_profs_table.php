@@ -16,7 +16,11 @@ return new class extends Migration
             $table->integer('age')->nullable();
             $table->string('email')->nullable();
             $table->integer('class')->nullable();
+            $table->unsignedBigInteger('matiere_id')->nullable(); // Nouvelle colonne pour la clé étrangère
             $table->timestamps();
+
+            // Contrainte de clé étrangère
+            $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('set null');
         });
     }
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EtudiantController;
+use App\Http\Controllers\Api\MatieresController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ProfController;
 use Illuminate\Http\Request;
@@ -42,6 +43,12 @@ Route::post('etudiant/create', [EtudiantController::class, 'store']);
 Route::put('etudiant/edit/{id}', [EtudiantController::class, 'update']);
 Route::delete('etudiant/{post}', [EtudiantController::class, 'delete']);
 
+//les route poure la table Matière 
+
+route::get('matiere', [MatieresController::class, 'index']);
+Route::post('matiere/create', [MatieresController::class, 'store']);
+Route::put('matiere/edit/{id}', [MatieresController::class, 'update']);
+Route::delete('matiere/{post}', [MatieresController::class, 'delete']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

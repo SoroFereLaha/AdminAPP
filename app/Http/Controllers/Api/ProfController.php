@@ -16,11 +16,13 @@ class ProfController extends Controller
         try {
 
             $profs = Prof::with('students')->get();
+            
 
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'les profs on été récupérés',
-                'data' => $profs
+                'data' => $profs,
+                
 
             ]);
         } catch (Exception $e) {
@@ -44,6 +46,7 @@ class ProfController extends Controller
             $post->age = $request->age;
             $post->email = $request->email;
             $post->class = $request->class;
+            $post->matiere_id = $request->matiere_id;
             $post->save();
 
             return response()->json([

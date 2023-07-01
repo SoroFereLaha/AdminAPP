@@ -54,9 +54,18 @@ class EtudiantController extends Controller
             $post->genre = $request->genre;
             $post->prof_id = $request->prof_id;
 
+            if ($post->genre != 'M' && $post->genre != 'F') {
+
+                return response()->json([
+                    // 'status_code' => 200,
+                    'status_message' => 'le genre doit etre M ou F',
+                    // 'data' => $post
+
+                ]);
+            }
             $post->save();
 
-            $prof->students()->attach($post);
+           
 
             return response()->json([
                 'status_code' => 200,
