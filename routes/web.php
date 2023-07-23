@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentTimetableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/studentTimetable', [StudentTimetableController::class, 'list'])->name('studentTimetable');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -34,5 +37,6 @@ Route::middleware('auth')->group(function () {
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('users', 'UsersController');
 });
+
 
 require __DIR__.'/auth.php';
