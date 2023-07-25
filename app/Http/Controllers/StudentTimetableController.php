@@ -8,6 +8,7 @@ class StudentTimetableController extends Controller
 {
     public function list(){
 
-        return view('emploiDuTemps');
+        $data['header_title']= "Class timetable list ";
+        return view('emploiDuTemps', $data);
     }
 }
