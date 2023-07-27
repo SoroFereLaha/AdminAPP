@@ -20,6 +20,9 @@ Route::get('/', function () {
 });
 
 Route::get('/studentTimetable', [StudentTimetableController::class, 'list'])->name('studentTimetable');
+Route::group(['middleware' => 'web'], function () {
+    Route::post('/studentTimetable/traitement', [StudentTimetableController::class, 'add_timetable'])->name('view_timetable');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
