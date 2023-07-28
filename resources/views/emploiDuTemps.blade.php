@@ -16,349 +16,108 @@
 
             @if (session('status'))
 
-                <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-                    <span class="font-medium">Success alert!</span> {{ session('status') }}.
+                <div class="mx-4 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+                    {{ session('status') }}.
                 </div>
-                
+
             @endif
 
             @foreach ($errors->all() as $error)
                 
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 my-3 rounded relative" role="alert">
-                    <strong class="font-bold">ATTENTION!</strong>
+                <div class="mx-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 my-3 rounded relative" role="alert">
                     <span class="block sm:inline">{{ $error }}</span>
-
                 </div>
                 
             @endforeach
 
-            <form action="{{ route('view_timetable') }}" method="POST" name="tableau_emploi_du_temps" class="pt-10">
+            <div class="container mx-auto p-4">
+                <form action="{{ route('view_timetable') }}" method="POST" class="bg-white shadow-md rounded-lg p-4">
+                    @csrf
+                    <h2 class="text-2xl font-semibold mb-4">Ajouter emploi du temps etudiant</h2>
+                    <div class="grid grid-cols-7 gap-4">
+                        <div class="col-span-1">
+                        <label for="jour" class="block font-medium">Jour</label>
+                        <select id="jour" name="jour" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                            <option value="choisir">Choisir</option>
+                            <option value="Lundi">Lundi</option>
+                            <option value="Mardi">Mardi</option>
+                            <option value="Mercredi">Mercredi</option>
+                            <option value="Jeudi">Jeudi</option>
+                            <option value="Vendredi">Vendredi</option>
+                            <option value="Samedi">Samedi</option>
+                            <option value="Dimanche">Dimanche</option>
+                        </select>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="heure_debut1" class="block font-medium">Heure début</label>
+                            <input type="time" id="heure_debut1" name="heure_debut" step="" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="heure_fin1" class="block font-medium">Heure fin</label>
+                            <input type="time" id="heure_fin1" name="heure_fin" step="" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="salle1" class="block font-medium">Salle</label>
+                            <input type="text" id="salle1" name="salle" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="professeur1" class="block font-medium">Professeur</label>
+                            <input type="text" id="professeur1" name="professeur" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="matiere1" class="block font-medium">Matière</label>
+                            <input type="text" id="matiere1" name="matiere" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div class="col-span-1">
+                            <label for="information1" class="block font-medium">Information</label>
+                            <input type="text" id="information1" name="information" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
+                    <!-- Répétez les lignes ci-dessus pour les jours 2 à 7 -->
+                    </div>
+                    <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Soumettre</button>
+                </form>
+            </div>
+            
+            <div class="container mx-auto p-4">
+                @if(isset($studentTimetables) && count($studentTimetables) > 0)
 
-                @csrf
 
-                <table class="border-separate border-spacing-2 border border-slate-500 ...">
+                <h1 class="text-2xl font-bold mb-4">Emploi du temps des 7 derniers jours</h1>
+        
+                <table class="w-full border-collapse">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th class="border border-slate-600 ...">Heure debut</th>
-                            <th class="border border-slate-600 ...">Heure fin</th>
-                            <th class="border border-slate-600 ...">Salle</th>
-                            <th class="border border-slate-600 ...">Professeur</th>
-                            <th class="border border-slate-600 ...">Matiere</th>
-                            <th class="border border-slate-600 ...">Information a savoir</th>
+                            <th class="border border-gray-400 px-4 py-2">Jour</th>
+                            <th class="border border-gray-400 px-4 py-2">Heure début</th>
+                            <th class="border border-gray-400 px-4 py-2">Heure fin</th>
+                            <th class="border border-gray-400 px-4 py-2">Salle</th>
+                            <th class="border border-gray-400 px-4 py-2">Professeur</th>
+                            <th class="border border-gray-400 px-4 py-2">Matière</th>
+                            <th class="border border-gray-400 px-4 py-2">Information</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="border border-slate-700 ...">Lundi</td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="heure_debut" class="">
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="heure_fin" class="">
-                            </td>
-                            <td class="border border-slate-700 ..." name="">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option class="" selected>choisir</option>
-                                    <option value="">Salle num A</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num A</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ..." name="professeur">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected>choisir</option>
-                                    <option value="">Professeur 1</option>
-                                    <option value="">Professeur 2</option>
-                                    <option value="">Professeur 3</option>
-                                    <option value="">Professeur 4</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ..." name="matiere">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected class="">choisir</option>
-                                    <option value="">informatique</option>
-                                    <option value="">Patisserie</option>
-                                    <option value="">Cuisine</option>
-                                    <option value="">Couture</option>
-                                    <option value="">Beauté esthétique</option>
-                                    <option value="">Coiffure homme</option>
-                                    <option value="">Coiffure femme</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" name="information" class="w-60">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-slate-700 ...">Mardi</td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="heure_debut" class="">
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="heure_debut" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option class="" selected>choisir</option>
-                                    <option value="">Salle num A</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num A</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected>choisir</option>
-                                    <option value="">Professeur 1</option>
-                                    <option value="">Professeur 2</option>
-                                    <option value="">Professeur 3</option>
-                                    <option value="">Professeur 4</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected class="">choisir</option>
-                                    <option value="">informatique</option>
-                                    <option value="">Patisserie</option>
-                                    <option value="">Cuisine</option>
-                                    <option value="">Couture</option>
-                                    <option value="">Beauté esthétique</option>
-                                    <option value="">Coiffure homme</option>
-                                    <option value="">Coiffure femme</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" name="heure_debut" class="w-60">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-slate-700 ...">Mercredi</td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option class="" selected>choisir</option>
-                                    <option value="">Salle num A</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num A</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected>choisir</option>
-                                    <option value="">Professeur 1</option>
-                                    <option value="">Professeur 2</option>
-                                    <option value="">Professeur 3</option>
-                                    <option value="">Professeur 4</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected class="">choisir</option>
-                                    <option value="">informatique</option>
-                                    <option value="">Patisserie</option>
-                                    <option value="">Cuisine</option>
-                                    <option value="">Couture</option>
-                                    <option value="">Beauté esthétique</option>
-                                    <option value="">Coiffure homme</option>
-                                    <option value="">Coiffure femme</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" name="start_time" class="w-60">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-slate-700 ...">Jeudi</td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option class="" selected>choisir</option>
-                                    <option value="">Salle num A</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num A</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected>choisir</option>
-                                    <option value="">Professeur 1</option>
-                                    <option value="">Professeur 2</option>
-                                    <option value="">Professeur 3</option>
-                                    <option value="">Professeur 4</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected class="">choisir</option>
-                                    <option value="">informatique</option>
-                                    <option value="">Patisserie</option>
-                                    <option value="">Cuisine</option>
-                                    <option value="">Couture</option>
-                                    <option value="">Beauté esthétique</option>
-                                    <option value="">Coiffure homme</option>
-                                    <option value="">Coiffure femme</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" name="start_time" class="w-60">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-slate-700 ...">Vendredi</td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option class="" selected>choisir</option>
-                                    <option value="">Salle num A</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num A</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected>choisir</option>
-                                    <option value="">Professeur 1</option>
-                                    <option value="">Professeur 2</option>
-                                    <option value="">Professeur 3</option>
-                                    <option value="">Professeur 4</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected class="">choisir</option>
-                                    <option value="">informatique</option>
-                                    <option value="">Patisserie</option>
-                                    <option value="">Cuisine</option>
-                                    <option value="">Couture</option>
-                                    <option value="">Beauté esthétique</option>
-                                    <option value="">Coiffure homme</option>
-                                    <option value="">Coiffure femme</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" name="start_time" class="w-60">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-slate-700 ...">Samedi</td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option class="" selected>choisir</option>
-                                    <option value="">Salle num A</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num A</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected>choisir</option>
-                                    <option value="">Professeur 1</option>
-                                    <option value="">Professeur 2</option>
-                                    <option value="">Professeur 3</option>
-                                    <option value="">Professeur 4</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected class="">choisir</option>
-                                    <option value="">informatique</option>
-                                    <option value="">Patisserie</option>
-                                    <option value="">Cuisine</option>
-                                    <option value="">Couture</option>
-                                    <option value="">Beauté esthétique</option>
-                                    <option value="">Coiffure homme</option>
-                                    <option value="">Coiffure femme</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" name="start_time" class="w-60">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="border border-slate-700 ...">Dimanche</td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <input type="time" name="start_time" class="">
-                                
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option class="" selected>choisir</option>
-                                    <option value="">Salle num A</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num B</option>
-                                    <option value="">Salle num A</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected>choisir</option>
-                                    <option value="">Professeur 1</option>
-                                    <option value="">Professeur 2</option>
-                                    <option value="">Professeur 3</option>
-                                    <option value="">Professeur 4</option>
-                                </select>
-                            </td>
-                            <td class="border border-slate-700 ...">
-                                <select id="" class=" border border-slate-700 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400 dark:focus:ring-blue-500">
-                                    <option selected class="">choisir</option>
-                                    <option value="">informatique</option>
-                                    <option value="">Patisserie</option>
-                                    <option value="">Cuisine</option>
-                                    <option value="">Couture</option>
-                                    <option value="">Beauté esthétique</option>
-                                    <option value="">Coiffure homme</option>
-                                    <option value="">Coiffure femme</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" name="start_time" class="w-60">
-                            </td>
-                        </tr>   
-                    </tbody>
-                </table>
+                
+                        @foreach ($studentTimetables as $studentTimetable)
 
-                <button type="submit" class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 my-5 w-full text-center mr-2 mb-2">Envoyer</button>
-            </form>
+                            <tr>
+                                <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->jour }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->heure_debut }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->heure_fin }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->salle }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->professeur }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->matiere }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->information }}</td>
+                            </tr>
+                            
+                        @endforeach
+                        
+                    </tbody>
+                    @else
+                            <p>Aucune emploi du temps trouvée pour les etudiants.</p>
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

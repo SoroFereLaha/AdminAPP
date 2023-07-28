@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('student_timetables', function (Blueprint $table) {
             $table->id();
+            $table->string('jour');
             $table->string('heure_debut');
             $table->string('heure_fin');
             $table->string('salle');
