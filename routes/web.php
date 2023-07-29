@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentTimetableController;
+use App\Http\Controllers\TeacherTimetableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +26,16 @@ Route::group(['middleware'=> 'web'], function () {
     Route::post('/studentTimetable/traitement', [StudentTimetableController::class, 'add_timetable'])->name('view_timetable');
 
 });
+Route::group(['middleware'=> 'web'], function () {
+    Route::get('/teacherTimetable/list', [TeacherTimetableController::class, 'list'])->name('teacherTimetable');
+    Route::get('/teacherTimetable/show', [TeacherTimetableController::class, 'show'])->name('teacherTimetable');  
+    Route::post('/teacherTimetable/traitement', [TeacherTimetableController::class, 'add_timetable'])->name('voir_timetable');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+});
+
+Route::get('/dashboard', [TeacherTimetableController::class, 'showDashboard'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

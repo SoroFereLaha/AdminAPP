@@ -12,12 +12,12 @@ class StudentTimetableController extends Controller
     {
         $studentTimetables = StudentTimetable::all();
         //dd($studentTimetables);
-        return view('emploiDuTemps')->with('studentTimetables', $studentTimetables);
+        return view('emploiDuTempsEtudiant')->with('studentTimetables', $studentTimetables);
     }
 
     public function list(){
         
-        return view('emploiDuTemps');
+        return view('emploiDuTempsEtudiant');
     }
 
     public function add_timetable(Request $request){
