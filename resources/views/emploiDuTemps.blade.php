@@ -78,7 +78,9 @@
                 </form>
             </div>
 
-            <button type="submit" class=" ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" @click="dropDownOpen=!dropDownOpen" >Voir emploi du temps</button>
+            <button type="submit" class=" ml-4 px-4 py-2 bg-gray-200 text-black font-bold rounded-md hover:bg-white group transition duration-300" @click="dropDownOpen=!dropDownOpen" >Voir emploi du temps
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-blue-500"></span>
+            </button>
             
             <div class="container mx-auto p-4" :class="{'hidden':!dropDownOpen,'block':dropDownOpen}">
                 @if(isset($studentTimetables) && count($studentTimetables) > 0)
