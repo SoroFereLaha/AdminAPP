@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="pt-12 flex">
+    <div class="pt-12 flex" x-data="{dropDownOpen:false}">
         @can('edit-users')
         <div class="sidbar-container w-1/5">
             <x-sidebar>
@@ -77,8 +77,10 @@
                     <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Soumettre</button>
                 </form>
             </div>
+
+            <button type="submit" class=" ml-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" @click="dropDownOpen=!dropDownOpen" >Voir emploi du temps</button>
             
-            <div class="container mx-auto p-4">
+            <div class="container mx-auto p-4" :class="{'hidden':!dropDownOpen,'block':dropDownOpen}">
                 @if(isset($studentTimetables) && count($studentTimetables) > 0)
 
 
