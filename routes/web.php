@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SecretariatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/admin/users/secretariats/secretariat',[SecretariatController::class, 'index'] )->name('admin.users.secretariats.secretariat');
+Route::get('/admin/users/secretariats/inscriptions', [SecretariatController::class, 'inscrit'])->name('admin.users.secretariats.inscriptions');
+Route::get('/admin/users/secretariats/formEtudiant', [SecretariatController::class, 'ajoutEt'])->name('admin.users.secretariats.formEtudiant');
 
 Route::get('/', function () {
     return view('welcome');
