@@ -138,73 +138,116 @@
                     <p class="text-blue-900 text-2xl font-extrabold">
                         TABLEAU DE BORDS > <span class="text-indigo-400">Service secretariat</span>
                     </p>
-
                 </div>
-                <div class="flex mx-10 my-5">
-                    <p class="font-sans italic text-left">Nous vous souhaitons la Bienvenue dans votre espace d'administration. C'est un plaisire de vous avoir ici pour gérer et superviser le service secretariat où vous pouver prendre en main les incription des etudiants, les absances aissi que les payemens 🎉🎊✨.</p>
+                <div class="w-2/5 mx-auto mt-4 p-4 bg-white shadow-md rounded-md">
+                    <form id="profForm">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="nom">Nom :</label>
+                            <input type="text" id="nom" name="nom" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="prenom">Prénom :</label>
+                            <input type="text" id="prenom" name="prenom" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="age">Âge :</label>
+                            <input type="number" id="age" name="age" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="email">Email :</label>
+                            <input type="email" id="email" name="email" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="class">Classe :</label>
+                            <input type="number" id="class" name="class" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="matiere_id">ID Matière :</label>
+                            <input type="number" id="matiere_id" name="matiere_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                        </div>
+                        <div class="flex justify-center">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Envoyer</button>
+                            <a href="{{ route('admin.users.secretariats.inscriptions') }}">
+                                <button type="button" id="retourButton" class="ml-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Retour</button>
+                            </a>
+                        </div>
+                    </form>
                 </div>
 
 
-                <div class="flex items-center my-10">
-                    <a href="{{ route('admin.users.secretariats.inscriptions') }}">
-                        <div class="container  shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-blue-100 w-4/5 h-40 mx-5">
-                            <div class="haut my-5 mx-10 flex pt-7 ">
-
-                                <span class="font-black  flex ">
-                                    <svg class="w-10 h-10 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
-                                    </svg>
-                                    <span class="text-2xl my-1 mx-2">Inscriptions</span>
-                                </span>
-
-                            </div>
-                            <div class="w-80 h-3/5 flex justify-center">
-                                <span class="text-6xl font-black text-blue-900">22</span>
-                                <p class="mx-2 text-xl text-blue-400 italic pt-6">Etudiant</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="{{ route('admin.users.secretariats.inscriptions') }}">
-                        <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-indigo-100 w-4/5 h-40 mx-1">
-                            <div class="haut my-5 flex mx-10 pt-7 ">
-
-                                <span class="font-black  flex ">
-                                    <svg class="w-10 h-10 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
-                                    </svg>
-                                    <span class="text-2xl my-1 mx-2">Absences</span>
-                                </span>
-
-                            </div>
-                            <div class="w-80 h-3/5 flex justify-center">
-                                <span class="text-6xl font-black text-blue-900">22</span>
-                                <p class="mx-2 pt-6 text-xl text-blue-400 italic ">Etudiant</p>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a href="{{ route('admin.users.secretariats.inscriptions') }}">
-                        <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-violet-100 w-4/5 h-40 mx-1">
-                            <div class="haut my-5 flex mx-10 pt-7 ">
-
-                                <span class="font-black flex ">
-                                    <svg class="w-10 h-10 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776" />
-                                    </svg>
-                                    <span class="text-2xl my-1 mx-2">Payements</span>
-                                </span>
-
-                            </div>
-                            <div class="w-80 h-3/5 flex justify-center">
-                                <span class="text-6xl font-black text-blue-900">22</span>
-                                <p class="mx-2 pt-6 text-xl text-blue-400 italic ">Etudiant</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
 
             </div>
+
+        </div>
+
+        <!-- ... Scripte de recuperation ... -->
+
+        <script>
+            const apiUrl = 'http://127.0.0.1:8000/api/prof/create';
+
+            document.querySelector('#profForm').addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const formData = new FormData(event.target);
+                const data = {
+                    nom: formData.get('nom'),
+                    prenom: formData.get('prenom'),
+                    age: parseInt(formData.get('age')),
+                    email: formData.get('email'),
+                    class: parseInt(formData.get('class')),
+                    matiere_id: parseInt(formData.get('matiere_id')),
+                };
+
+                // Vérifier si tous les champs sont remplis
+                if (Object.values(data).some(value => value === '' || value === null)) {
+                    showAlert('Veuillez remplir tous les champs du formulaire.', 'error');
+                    return;
+                }
+
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        showAlert('Nouveau professeur ajouté avec succès!', 'success');
+                        // Vous pouvez également mettre à jour la liste des professeurs ici en effectuant une nouvelle requête GET vers l'API pour récupérer les données mises à jour.
+                    } else {
+                        showAlert('Une erreur est survenue lors de l\'ajout du professeur.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Erreur lors de la requête vers l\'API:', error);
+                    showAlert("l'ID de la matière n'existe pas", 'error');
+                }
+            });
+
+            function showAlert(message, type) {
+                const alertElement = document.createElement('div');
+                alertElement.textContent = message;
+                alertElement.classList.add('text-white', 'text-sm', 'px-4', 'py-2', 'rounded', 'mb-4');
+                if (type === 'success') {
+                    alertElement.classList.add('bg-green-500');
+                } else if (type === 'error') {
+                    alertElement.classList.add('bg-red-500');
+                }
+
+                // Ajouter l'alerte avant le formulaire
+                const formElement = document.querySelector('#profForm');
+                formElement.parentElement.insertBefore(alertElement, formElement);
+
+                // Supprimer l'alerte après 3 secondes (3000 millisecondes)
+                setTimeout(() => {
+                    alertElement.remove();
+                }, 5000);
+            }
+        </script>
+
+
+
 
     </x-app-layout>
 

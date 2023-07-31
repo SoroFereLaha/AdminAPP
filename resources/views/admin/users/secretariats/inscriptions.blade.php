@@ -146,7 +146,7 @@
 
                 <div class="flex items-center my-10">
 
-                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-blue-100 w-80 h-50 mx-10">
+                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-blue-100 w-80 h-50 mx-3">
                         <div class="haut my-5 flex">
 
                             <span class="font-black mx-20 flex ">
@@ -175,7 +175,7 @@
 
 
 
-                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-indigo-100 w-80 h-50 mx-5">
+                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-indigo-100 w-80 h-50 mx-2">
                         <div class="haut my-5 flex ">
 
                             <span class="font-black mx-20 flex ">
@@ -192,7 +192,9 @@
                         <div class="w-80 flex justify-between">
 
                             <button onclick="listProfs()" class="text-white font-bold bg-blue-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Lister</button>
-                            <button class="font-bold bg-green-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Ajouter</button>
+                            <a href="{{ route('admin.users.secretariats.formProf') }}">
+                                <button class="font-bold bg-green-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Ajouter</button>
+                            </a>
 
                         </div>
 
@@ -204,7 +206,7 @@
 
 
 
-                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-violet-100 w-80 h-50 mx-5">
+                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-violet-100 w-80 h-50 mx-3">
                         <div class="haut my-5 flex ">
 
                             <span class="font-black mx-20 flex ">
@@ -221,8 +223,9 @@
                         <div class="w-80 flex justify-between">
 
                             <button onclick="listMatieres()" class="text-white font-bold bg-blue-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Lister</button>
-                            <button class="font-bold bg-green-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Ajouter</button>
-
+                            <a href="{{ route('admin.users.secretariats.formMatière') }}">
+                                <button class="font-bold bg-green-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Ajouter</button>
+                            </a>
                         </div>
 
                         <div class="w-80 h-2/5 flex items-center justify-center">
@@ -320,13 +323,24 @@
                                             <td class="text-center border">${item.genre }</td>
                                             <td class="text-center border">${item.prof_id}</td>
                                             <td class="text-center border flex items-center justify-center pt-2">
+                                            
                                             <svg class="text-green-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>
-                                            <svg class="text-red-500 w-6 h-6 mx-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                           
+                                            <svg class="text-red-500 w-6 h-6 mx-10 delete-student" 
+                                                data-id="${item.id}" 
+                                                xmlns="http://www.w3.org/2000/svg" 
+                                                fill="none" 
+                                                viewBox="0 0 24 24" 
+                                                stroke-width="1.5" 
+                                                stroke="currentColor" 
+                                                class="w-6 h-6"
+                                                style="cursor: pointer;">
+                                                <path stroke-linecap="round" 
+                                                    stroke-linejoin="round" 
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                             </svg>
-
                                             </td>
                                         `;
                             tableBody.appendChild(row);
@@ -365,8 +379,20 @@
                                             <svg class="text-green-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>
-                                            <svg class="text-red-500 w-6 h-6 mx-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            <svg class="text-red-500 w-6 h-6 mx-10 delete-professor"
+                                                data-id="${item.id}"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="w-6 h-6"
+                                                style="cursor: pointer;"
+                                            >
+                                                <path stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                                />
                                             </svg>
 
                                             </td>
@@ -402,8 +428,20 @@
                                             <svg class="text-green-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>
-                                            <svg class="text-red-500 w-6 h-6 mx-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            <svg class="text-red-500 w-6 h-6 mx-10 delete-matiere"
+                                                data-id="${item.id}"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="w-6 h-6"
+                                                style="cursor: pointer;"
+                                            >
+                                                <path stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                                />
                                             </svg>
 
                                             </td>
@@ -411,6 +449,101 @@
                             tableBody.appendChild(row);
                         });
                     }
+
+
+                    // ...
+
+                    // Gestionnaire d'événements pour le clic sur le lien
+                    document.addEventListener('click', function(event) {
+                        if (event.target.matches('.delete-student')) {
+                            event.preventDefault(); // Empêcher le comportement par défaut du lien (redirection)
+                            const studentId = event.target.dataset.id;
+
+                            // Récupérer le jeton CSRF depuis la balise meta
+                            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+                            fetch(`http://127.0.0.1:8000/api/etudiant/${studentId}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'X-CSRF-TOKEN': csrfToken, // Utiliser le jeton CSRF récupéré
+                                        'Content-Type': 'application/json'
+                                    },
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('La suppression de l\'étudiant a échoué.');
+                                    }
+                                    // Mettre à jour la liste des étudiants après la suppression réussie
+                                    listEtudiants();
+                                })
+                                .catch(error => {
+                                    console.error('Erreur lors de la suppression de l\'étudiant:', error);
+                                    // Gérer l'erreur si nécessaire
+                                });
+                        }
+                    });
+
+                    // ...
+
+                    // Gestionnaire d'événements pour le clic sur le lien de suppression d'un professeur
+                    document.addEventListener('click', function(event) {
+                        if (event.target.matches('.delete-professor')) {
+                            event.preventDefault(); // Empêcher le comportement par défaut du lien (redirection)
+                            const professorId = event.target.dataset.id;
+
+                            // Récupérer le jeton CSRF depuis la balise meta
+                            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+                            fetch(`http://127.0.0.1:8000/api/prof/${professorId}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'X-CSRF-TOKEN': csrfToken, // Utiliser le jeton CSRF récupéré
+                                        'Content-Type': 'application/json'
+                                    },
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('La suppression du professeur a échoué.');
+                                    }
+                                    // Mettre à jour la liste des professeurs après la suppression réussie
+                                    listProfs();
+                                })
+                                .catch(error => {
+                                    console.error('Erreur lors de la suppression du professeur:', error);
+                                    // Gérer l'erreur si nécessaire
+                                });
+                        }
+                    });
+
+                    // Gestionnaire d'événements pour le clic sur le lien de suppression d'une matière
+                    document.addEventListener('click', function(event) {
+                        if (event.target.matches('.delete-matiere')) {
+                            event.preventDefault(); // Empêcher le comportement par défaut du lien (redirection)
+                            const matiereId = event.target.dataset.id;
+
+                            // Récupérer le jeton CSRF depuis la balise meta
+                            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+
+                            fetch(`http://127.0.0.1:8000/api/matiere/${matiereId}`, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'X-CSRF-TOKEN': csrfToken, // Utiliser le jeton CSRF récupéré
+                                        'Content-Type': 'application/json'
+                                    },
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error('La suppression de la matière a échoué.');
+                                    }
+                                    // Mettre à jour la liste des matières après la suppression réussie
+                                    listMatieres();
+                                })
+                                .catch(error => {
+                                    console.error('Erreur lors de la suppression de la matière:', error);
+                                    // Gérer l'erreur si nécessaire
+                                });
+                        }
+                    });
                 </script>
 
 

@@ -24,4 +24,14 @@ class SecretariatController extends Controller
         return view('admin.users.secretariats.formEtudiant',);
     }
 
+    public function ajoutProf()
+    {
+        return view('admin.users.secretariats.formProf',);
+    }
+
+    public function ajoutMatière()
+    {
+        return view('admin.users.secretariats.formMatière',);
+    }
+
 }
