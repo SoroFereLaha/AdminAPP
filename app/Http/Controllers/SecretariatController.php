@@ -33,5 +33,4 @@ class SecretariatController extends Controller
     {
         return view('admin.users.secretariats.formMatière',);
     }
-
 }

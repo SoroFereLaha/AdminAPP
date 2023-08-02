@@ -144,6 +144,7 @@
 
 
 
+
                 <div class="flex items-center my-10">
 
                     <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-blue-100 w-80 h-50 mx-3">
@@ -168,9 +169,10 @@
                         </div>
 
                         <div class="w-80 h-2/5 flex items-center justify-center">
-                            <span class="text-4xl font-black text-blue-900 pt-4">22</span>
+                            <span id="nombreEtudiants" class="text-4xl font-black text-blue-900 pt-4"></span>
                             <p class="mx-2 text-xl text-blue-400 italic pt-6">Etudiant</p>
                         </div>
+
                     </div>
 
 
@@ -199,7 +201,7 @@
                         </div>
 
                         <div class="w-80 h-2/5 flex items-center justify-center">
-                            <span class="text-4xl font-black text-blue-900 pt-4">22</span>
+                            <span id="nombreProfesseurs" class="text-4xl font-black text-blue-900 pt-4"></span>
                             <p class="mx-2 text-xl text-blue-400 italic pt-6">Professeurs</p>
                         </div>
                     </div>
@@ -229,7 +231,7 @@
                         </div>
 
                         <div class="w-80 h-2/5 flex items-center justify-center">
-                            <span class="text-4xl font-black text-blue-900 pt-4">22</span>
+                            <span id="nombreMatieres" class="text-4xl font-black text-blue-900 pt-4"></span>
                             <p class="mx-2 text-xl text-blue-400 italic pt-6">Matières</p>
                         </div>
                     </div>
@@ -257,20 +259,106 @@
 
                 <!-- tableau qui affiche les Api_etudiant  -->
 
+                <!-- Boîte de dialogue personnalisée pour la suppression des étudiants -->
+                <div id="confirmationModalEtudiant" class="modal fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden">
+                    <div class="modal-content bg-white p-4 rounded shadow-md">
+                        <p class="mb-4">Voulez-vous vraiment supprimer cet étudiant ?</p>
+                        <div class="modal-buttons flex justify-center">
+                            <button id="confirmBtnEtudiant" class="btn-confirm bg-green-500 text-white px-4 py-2 rounded mr-2">OK</button>
+                            <button id="cancelBtnEtudiant" class="btn-cancel bg-red-500 text-white px-4 py-2 rounded">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boîte de dialogue personnalisée pour la suppression des professeurs -->
+                <div id="confirmationModalProf" class="modal fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden">
+                    <div class="modal-content bg-white p-4 rounded shadow-md">
+                        <p class="mb-4">Voulez-vous vraiment supprimer ce professeur ?</p>
+                        <div class="modal-buttons flex justify-center">
+                            <button id="confirmBtnProf" class="btn-confirm bg-green-500 text-white px-4 py-2 rounded mr-2">OK</button>
+                            <button id="cancelBtnProf" class="btn-cancel bg-red-500 text-white px-4 py-2 rounded">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boîte de dialogue personnalisée pour la suppression des matières -->
+                <div id="confirmationModalMatiere" class="modal fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden">
+                    <div class="modal-content bg-white p-4 rounded shadow-md">
+                        <p class="mb-4">Voulez-vous vraiment supprimer cette matière ?</p>
+                        <div class="modal-buttons flex justify-center">
+                            <button id="confirmBtnMatiere" class="btn-confirm bg-green-500 text-white px-4 py-2 rounded mr-2">OK</button>
+                            <button id="cancelBtnMatiere" class="btn-cancel bg-red-500 text-white px-4 py-2 rounded">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Ajoutez un élément de superposition modale -->
+                <div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                    <div class="w-2/5 bg-white p-4 rounded shadow-lg">
+                        <!-- Votre formulaire de mise à jour ici -->
+                        <form id="studentForm" onsubmit="updateEtudiant(); return false;">
+                            <input type="hidden" id="etudiantId" name="etudiantId" value="">
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="nom">Nom :</label>
+                                <input type="text" id="nom" name="nom" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="prenom">Prénom :</label>
+                                <input type="text" id="prenom" name="prenom" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="age">Âge :</label>
+                                <input type="number" id="age" name="age" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="genre">Genre :</label>
+                                <select id="genre" name="genre" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                                    <option value="M">M</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="prof_id">ID Professeur :</label>
+                                <input type="number" id="prof_id" name="prof_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="flex justify-center">
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Envoyer</button>
+                                <button type="button" id="retourButton" class="ml-4 bg-red-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" onclick="closeUpdateForm()">Retour</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+
 
                 <script>
                     const apiUrlEtudiant = 'http://127.0.0.1:8000/api/etudiant';
                     const apiUrlProf = 'http://127.0.0.1:8000/api/prof';
                     const apiUrlMatiere = 'http://127.0.0.1:8000/api/matiere';
 
+                    function getCsrfToken() {
+                        return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                    }
+
+                    // Définir la variable csrfToken en utilisant la valeur du jeton CSRF récupérée
+                    const csrfToken = getCsrfToken();
+
+
                     function listEtudiants() {
                         fetch(apiUrlEtudiant)
                             .then(response => response.json())
                             .then(data => {
                                 displayEtudiantsData(data.data);
+
+                                const nombreEtudiantsElement = document.getElementById('nombreEtudiants');
+                                nombreEtudiantsElement.textContent = data.data.length;
                             })
                             .catch(error => {
                                 console.error('Erreur lors de la récupération des données des étudiants:', error);
+
                             });
                     }
 
@@ -279,6 +367,8 @@
                             .then(response => response.json())
                             .then(data => {
                                 displayProfsData(data.data);
+                                const nombreProfesseursElement = document.getElementById('nombreProfesseurs');
+                                nombreProfesseursElement.textContent = data.data.length;
                             })
                             .catch(error => {
                                 console.error('Erreur lors de la récupération des données des professeurs:', error);
@@ -290,6 +380,8 @@
                             .then(response => response.json())
                             .then(data => {
                                 displayMatieresData(data.data);
+                                const nombreMatieresElement = document.getElementById('nombreMatieres');
+                                nombreMatieresElement.textContent = data.data.length;
                             })
                             .catch(error => {
                                 console.error('Erreur lors de la récupération des données des matières:', error);
@@ -303,7 +395,7 @@
                                                 <th>ID</th>
                                                 <th>Nom</th>
                                                 <th>Prénom</th>
-                                                <th>Âge</thclass=>
+                                                <th>Âge</th>
                                                 <th>Genre</th>
                                                 <th>Prof_id</th>
                                                 <th>Options</th>
@@ -324,9 +416,20 @@
                                             <td class="text-center border">${item.prof_id}</td>
                                             <td class="text-center border flex items-center justify-center pt-2">
                                             
-                                            <svg class="text-green-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                           <svg class="text-green-500 w-6 h-6"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
+                                                class="w-6 h-6"
+                                                style="cursor: pointer;"
+                                                onclick="openUpdateForm(${item.id}, '${item.nom}', '${item.prenom}', ${item.age ? item.age : ''}, '${item.genre}', ${item.prof_id});">
+                                                <path stroke-linecap="round" 
+                                                    stroke-linejoin="round" 
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>
+
                                            
                                             <svg class="text-red-500 w-6 h-6 mx-10 delete-student" 
                                                 data-id="${item.id}" 
@@ -346,6 +449,97 @@
                             tableBody.appendChild(row);
                         });
                     }
+
+                    function openUpdateForm(id, nom, prenom, age, genre, prof_id) {
+                        // Remplir le formulaire avec les données de l'étudiant sélectionné
+                        document.getElementById('nom').value = nom;
+                        document.getElementById('prenom').value = prenom;
+                        document.getElementById('age').value = age;
+                        document.getElementById('genre').value = genre;
+                        document.getElementById('prof_id').value = prof_id;
+
+                        // Afficher la superposition modale
+                        const updateModal = document.getElementById('updateModal');
+                        updateModal.classList.remove('hidden');
+
+                        // Changer le libellé du bouton "Retour" en "Fermer"
+                        const retourButton = document.getElementById('retourButton');
+                        retourButton.textContent = 'Fermer';
+
+                        // Définir l'ID de l'étudiant dans le formulaire pour l'utiliser lors de la mise à jour
+                        document.getElementById('etudiantId').value = id;
+                    }
+
+                    function updateEtudiant(id) {
+                        // Votre code pour afficher le formulaire de mise à jour ici
+                        listEtudiants();
+                    }
+
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                        
+
+                        const form = document.getElementById('studentForm');
+                        form.addEventListener('submit', function(event) {
+                            event.preventDefault(); // Empêcher la soumission du formulaire par défaut
+
+                            // Récupérer l'ID de l'étudiant à partir du champ masqué
+                            const etudiantId = document.getElementById('etudiantId').value;
+
+                            // Obtenir l'URL de l'API update
+                            const apiUrlUpdate = `http://127.0.0.1:8000/api/etudiant/edit/${etudiantId}`;
+
+                            // Récupérer les valeurs des autres champs du formulaire
+                            const nom = document.getElementById('nom').value;
+                            const prenom = document.getElementById('prenom').value;
+                            const age = document.getElementById('age').value;
+                            const genre = document.getElementById('genre').value;
+                            const prof_id = document.getElementById('prof_id').value;
+
+                            // Construire l'objet de données à envoyer à l'API
+                            const data = {
+                                nom: nom,
+                                prenom: prenom,
+                                age: age,
+                                genre: genre,
+                                prof_id: prof_id
+                            };
+
+                            // Envoyer la requête PUT à l'API
+                            fetch(apiUrlUpdate, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                    },
+                                    body: JSON.stringify(data)
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Gérer la réponse de l'API ici si nécessaire
+                                    console.log('Réponse de l\'API:', data);
+                                })
+                                .catch(error => {
+                                    console.error('Erreur lors de la mise à jour de l\'étudiant:', error);
+                                });
+                        });
+                    });
+
+
+
+
+                    function closeUpdateForm() {
+                        // Masquer la superposition modale
+                        const updateModal = document.getElementById('updateModal');
+                        updateModal.classList.add('hidden');
+
+                        // Rétablir le libellé du bouton "Retour"
+                        const retourButton = document.getElementById('retourButton');
+                        retourButton.textContent = 'Retour';
+                    }
+
+
+
 
                     function displayProfsData(data) {
                         // Ajouter les en-têtes spécifiques aux professeurs
@@ -376,9 +570,22 @@
                                             <td class="text-center border">${item.class ? item.class : ''}</td>
                                             <td class="text-center border">${item.matiere_id ? item.matiere_id : ''}</td>
                                             <td class="text-center border flex items-center justify-center pt-2">
-                                            <svg class="text-green-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                            <svg class="text-green-500 w-6 h-6" 
+                                                xmlns="http://www.w3.org/2000/svg" 
+                                                fill="none" 
+                                                viewBox="0 0 24 24" 
+                                                stroke-width="1.5" 
+                                                stroke="currentColor" 
+                                                class="w-6 h-6"
+                                                style="cursor: pointer;"
+                                               
+                                            >
+                                                <path stroke-linecap="round" 
+                                                    stroke-linejoin="round" 
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>
+
+
                                             <svg class="text-red-500 w-6 h-6 mx-10 delete-professor"
                                                 data-id="${item.id}"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -425,9 +632,23 @@
                                             <td class="text-center border">${item.description}</td>
                                             <td class="text-center border">${item.prof_id}</td>
                                             <td class="text-center border flex items-center justify-center pt-2">
-                                            <svg class="text-green-500 w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                               <svg class="text-green-500 w-6 h-6" 
+                                                xmlns="http://www.w3.org/2000/svg" 
+                                                fill="none" 
+                                                viewBox="0 0 24 24" 
+                                                stroke-width="1.5" 
+                                                stroke="currentColor" 
+                                                class="w-6 h-6"
+                                                style="cursor: pointer;"
+                                               
+                                            >
+                                                <path stroke-linecap="round" 
+                                                    stroke-linejoin="round" 
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                             </svg>
+
+
+
                                             <svg class="text-red-500 w-6 h-6 mx-10 delete-matiere"
                                                 data-id="${item.id}"
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -450,98 +671,114 @@
                         });
                     }
 
-
                     // ...
 
-                    // Gestionnaire d'événements pour le clic sur le lien
                     document.addEventListener('click', function(event) {
-                        if (event.target.matches('.delete-student')) {
-                            event.preventDefault(); // Empêcher le comportement par défaut du lien (redirection)
+                        if (event.target.classList.contains('delete-student')) {
+                            // Gérer l'action de suppression d'un étudiant
                             const studentId = event.target.dataset.id;
 
-                            // Récupérer le jeton CSRF depuis la balise meta
-                            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+                            const confirmationModalEtudiant = document.getElementById('confirmationModalEtudiant');
+                            confirmationModalEtudiant.classList.remove('hidden');
 
-                            fetch(`http://127.0.0.1:8000/api/etudiant/${studentId}`, {
-                                    method: 'DELETE',
-                                    headers: {
-                                        'X-CSRF-TOKEN': csrfToken, // Utiliser le jeton CSRF récupéré
-                                        'Content-Type': 'application/json'
-                                    },
-                                })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error('La suppression de l\'étudiant a échoué.');
-                                    }
-                                    // Mettre à jour la liste des étudiants après la suppression réussie
-                                    listEtudiants();
-                                })
-                                .catch(error => {
-                                    console.error('Erreur lors de la suppression de l\'étudiant:', error);
-                                    // Gérer l'erreur si nécessaire
-                                });
-                        }
-                    });
+                            const confirmBtnEtudiant = document.getElementById('confirmBtnEtudiant');
+                            confirmBtnEtudiant.addEventListener('click', function() {
+                                // Appel à l'API de suppression d'étudiant
+                                fetch(`http://127.0.0.1:8000/api/etudiant/${studentId}`, {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'X-CSRF-TOKEN': csrfToken, // Assurez-vous de définir cette variable en récupérant le jeton CSRF de la balise meta comme indiqué précédemment
+                                            'Content-Type': 'application/json',
+                                        },
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('La suppression de l\'étudiant a échoué.');
+                                        }
+                                        // Mettre à jour la liste des étudiants après la suppression réussie
+                                        listEtudiants();
+                                        confirmationModalEtudiant.classList.add('hidden');
+                                    })
+                                    .catch(error => {
+                                        console.error('Erreur lors de la suppression de l\'étudiant :', error);
+                                        // Gérer l'erreur si nécessaire
+                                    });
+                            });
 
-                    // ...
-
-                    // Gestionnaire d'événements pour le clic sur le lien de suppression d'un professeur
-                    document.addEventListener('click', function(event) {
-                        if (event.target.matches('.delete-professor')) {
-                            event.preventDefault(); // Empêcher le comportement par défaut du lien (redirection)
-                            const professorId = event.target.dataset.id;
-
-                            // Récupérer le jeton CSRF depuis la balise meta
-                            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
-
-                            fetch(`http://127.0.0.1:8000/api/prof/${professorId}`, {
-                                    method: 'DELETE',
-                                    headers: {
-                                        'X-CSRF-TOKEN': csrfToken, // Utiliser le jeton CSRF récupéré
-                                        'Content-Type': 'application/json'
-                                    },
-                                })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error('La suppression du professeur a échoué.');
-                                    }
-                                    // Mettre à jour la liste des professeurs après la suppression réussie
-                                    listProfs();
-                                })
-                                .catch(error => {
-                                    console.error('Erreur lors de la suppression du professeur:', error);
-                                    // Gérer l'erreur si nécessaire
-                                });
-                        }
-                    });
-
-                    // Gestionnaire d'événements pour le clic sur le lien de suppression d'une matière
-                    document.addEventListener('click', function(event) {
-                        if (event.target.matches('.delete-matiere')) {
-                            event.preventDefault(); // Empêcher le comportement par défaut du lien (redirection)
+                            const cancelBtnEtudiant = document.getElementById('cancelBtnEtudiant');
+                            cancelBtnEtudiant.addEventListener('click', function() {
+                                confirmationModalEtudiant.classList.add('hidden');
+                            });
+                        } else if (event.target.classList.contains('delete-matiere')) {
+                            // Gérer l'action de suppression d'une matière
                             const matiereId = event.target.dataset.id;
 
-                            // Récupérer le jeton CSRF depuis la balise meta
-                            const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+                            const confirmationModalMatiere = document.getElementById('confirmationModalMatiere');
+                            confirmationModalMatiere.classList.remove('hidden');
 
-                            fetch(`http://127.0.0.1:8000/api/matiere/${matiereId}`, {
-                                    method: 'DELETE',
-                                    headers: {
-                                        'X-CSRF-TOKEN': csrfToken, // Utiliser le jeton CSRF récupéré
-                                        'Content-Type': 'application/json'
-                                    },
-                                })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error('La suppression de la matière a échoué.');
-                                    }
-                                    // Mettre à jour la liste des matières après la suppression réussie
-                                    listMatieres();
-                                })
-                                .catch(error => {
-                                    console.error('Erreur lors de la suppression de la matière:', error);
-                                    // Gérer l'erreur si nécessaire
-                                });
+                            const confirmBtnMatiere = document.getElementById('confirmBtnMatiere');
+                            confirmBtnMatiere.addEventListener('click', function() {
+                                // Appel à l'API de suppression de matière
+                                fetch(`http://127.0.0.1:8000/api/matiere/${matiereId}`, {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'X-CSRF-TOKEN': csrfToken, // Assurez-vous de définir cette variable en récupérant le jeton CSRF de la balise meta comme indiqué précédemment
+                                            'Content-Type': 'application/json',
+                                        },
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('La suppression de la matière a échoué.');
+                                        }
+                                        // Mettre à jour la liste des matières après la suppression réussie
+                                        listMatieres();
+                                        confirmationModalMatiere.classList.add('hidden');
+                                    })
+                                    .catch(error => {
+                                        console.error('Erreur lors de la suppression de la matière :', error);
+                                        // Gérer l'erreur si nécessaire
+                                    });
+                            });
+
+                            const cancelBtnMatiere = document.getElementById('cancelBtnMatiere');
+                            cancelBtnMatiere.addEventListener('click', function() {
+                                confirmationModalMatiere.classList.add('hidden');
+                            });
+                        } else if (event.target.classList.contains('delete-professor')) {
+                            // Gérer l'action de suppression d'un professeur
+                            const professorId = event.target.dataset.id;
+
+                            const confirmationModalProf = document.getElementById('confirmationModalProf');
+                            confirmationModalProf.classList.remove('hidden');
+
+                            const confirmBtnProf = document.getElementById('confirmBtnProf');
+                            confirmBtnProf.addEventListener('click', function() {
+                                // Appel à l'API de suppression de professeur
+                                fetch(`http://127.0.0.1:8000/api/prof/${professorId}`, {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'X-CSRF-TOKEN': csrfToken, // Assurez-vous de définir cette variable en récupérant le jeton CSRF de la balise meta comme indiqué précédemment
+                                            'Content-Type': 'application/json',
+                                        },
+                                    })
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('La suppression du professeur a échoué.');
+                                        }
+                                        // Mettre à jour la liste des professeurs après la suppression réussie
+                                        listProfs();
+                                        confirmationModalProf.classList.add('hidden');
+                                    })
+                                    .catch(error => {
+                                        console.error('Erreur lors de la suppression du professeur :', error);
+                                        // Gérer l'erreur si nécessaire
+                                    });
+                            });
+
+                            const cancelBtnProf = document.getElementById('cancelBtnProf');
+                            cancelBtnProf.addEventListener('click', function() {
+                                confirmationModalProf.classList.add('hidden');
+                            });
                         }
                     });
                 </script>
