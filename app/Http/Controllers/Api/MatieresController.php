@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateMatièresRequest;
 use App\Http\Requests\EditMatièresRequest;
 use App\Models\matieres;
+use App\Models\Prof;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -35,6 +36,18 @@ class MatieresController extends Controller
 
 
         try {
+            
+            $prof = Prof::find($request->prof_id);
+
+            if (!$prof) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'Le professeur spécifié n\'existe pas.',
+                    'data' => null
+                ], 404);
+            }
+
+
             $post = new matieres();
             $post->nom = $request->nom;
             $post->prof_id = $request->prof_id;

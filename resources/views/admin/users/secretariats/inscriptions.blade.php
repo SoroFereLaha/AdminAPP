@@ -294,6 +294,7 @@
 
 
                 <!-- Ajoutez un élément de superposition modale -->
+
                 <div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
                     <div class="w-2/5 bg-white p-4 rounded shadow-lg">
                         <!-- Votre formulaire de mise à jour ici -->
@@ -331,6 +332,72 @@
                     </div>
                 </div>
 
+                <!-- Formulaire de mise à jour du professeur -->
+                <div id="updateModal2" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                    <div class="w-2/5 bg-white p-4 rounded shadow-lg">
+                        <form id="profForm" onsubmit="updateProfesseur(); return false;">
+                            <input type="hidden" id="prof_id" name="prof_id" value="">
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="prof_nom">Nom :</label>
+                                <input type="text" id="prof_nom" name="prof_nom" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="prof_prenom">Prénom :</label>
+                                <input type="text" id="prof_prenom" name="prof_prenom" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="prof_age">Âge :</label>
+                                <input type="number" id="prof_age" name="prof_age" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="email">Email :</label>
+                                <input type="email" id="email" name="email" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="class">Classe :</label>
+                                <input type="number" id="class" name="class" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="matiere_id">ID Matière :</label>
+                                <input type="number" id="matiere_id" name="matiere_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+
+                            <div class="flex justify-center">
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Envoyer</button>
+                                <button type="button" id="retourButton" class="ml-4 bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" onclick="closeUpdateForm2()">Retour</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- Formulaire de mise à jour de la matière -->
+                <div id="updateMatiereModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                    <div class="w-2/5 bg-white p-4 rounded shadow-lg">
+                        <form id="matiereForm" onsubmit="updateMatiere(); return false;">
+                            <input type="hidden" id="matiere_id" name="matiere_id" value="">
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="nom_matiere">Nom :</label>
+                                <input type="text" id="nom_matiere" name="nom" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="description">Description :</label>
+                                <input type="text" id="description" name="description" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="prof_id_matiere">ID Professeur :</label>
+                                <input type="number" id="prof_id_matiere" name="prof_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+
+                            <div class="flex justify-center">
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Envoyer</button>
+                                <button type="button" id="retourButton" class="ml-4 bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" onclick="closeUpdateMatiereForm()">Retour</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
 
 
 
@@ -353,6 +420,7 @@
                             .then(data => {
                                 displayEtudiantsData(data.data);
 
+
                                 const nombreEtudiantsElement = document.getElementById('nombreEtudiants');
                                 nombreEtudiantsElement.textContent = data.data.length;
                             })
@@ -367,6 +435,7 @@
                             .then(response => response.json())
                             .then(data => {
                                 displayProfsData(data.data);
+
                                 const nombreProfesseursElement = document.getElementById('nombreProfesseurs');
                                 nombreProfesseursElement.textContent = data.data.length;
                             })
@@ -380,6 +449,7 @@
                             .then(response => response.json())
                             .then(data => {
                                 displayMatieresData(data.data);
+                                console.log(data.data)
                                 const nombreMatieresElement = document.getElementById('nombreMatieres');
                                 nombreMatieresElement.textContent = data.data.length;
                             })
@@ -477,7 +547,7 @@
 
 
                     document.addEventListener('DOMContentLoaded', function() {
-                        
+
 
                         const form = document.getElementById('studentForm');
                         form.addEventListener('submit', function(event) {
@@ -516,8 +586,7 @@
                                 })
                                 .then(response => response.json())
                                 .then(data => {
-                                    // Gérer la réponse de l'API ici si nécessaire
-                                    console.log('Réponse de l\'API:', data);
+                                    closeUpdateForm();
                                 })
                                 .catch(error => {
                                     console.error('Erreur lors de la mise à jour de l\'étudiant:', error);
@@ -570,16 +639,15 @@
                                             <td class="text-center border">${item.class ? item.class : ''}</td>
                                             <td class="text-center border">${item.matiere_id ? item.matiere_id : ''}</td>
                                             <td class="text-center border flex items-center justify-center pt-2">
-                                            <svg class="text-green-500 w-6 h-6" 
-                                                xmlns="http://www.w3.org/2000/svg" 
-                                                fill="none" 
-                                                viewBox="0 0 24 24" 
-                                                stroke-width="1.5" 
-                                                stroke="currentColor" 
+                                           <svg class="text-green-500 w-6 h-6"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="1.5"
+                                                stroke="currentColor"
                                                 class="w-6 h-6"
                                                 style="cursor: pointer;"
-                                               
-                                            >
+                                                onclick="openUpdateForm2(${item.id}, '${item.nom}', '${item.prenom}', ${item.age ? item.age : ''}, '${item.genre}','${item.email}', ${item.class}, ${item.matiere_id});">
                                                 <path stroke-linecap="round" 
                                                     stroke-linejoin="round" 
                                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -608,17 +676,109 @@
                         });
                     }
 
+                    // Fonction pour afficher le formulaire de mise à jour du professeur avec les données existantes
+                    function openUpdateForm2(id, nom, prenom, age, genre, email, classe, matiere_id) {
+                        // Remplir le formulaire avec les données du professeur sélectionné
+                        document.getElementById('prof_id').value = id; // Remplacez 'prof_id' par 'id'
+                        document.getElementById('prof_nom').value = nom;
+                        document.getElementById('prof_prenom').value = prenom;
+                        document.getElementById('prof_age').value = age ? age : ''; // Vérifiez si l'âge est défini
+                        document.getElementById('genre').value = genre;
+                        document.getElementById('email').value = email;
+                        document.getElementById('class').value = classe;
+                        document.getElementById('matiere_id').value = matiere_id;
+
+                        // Afficher la superposition modale pour le formulaire de mise à jour des professeurs
+                        const updateModal2 = document.getElementById('updateModal2');
+                        updateModal2.classList.remove('hidden');
+
+                        // Changer le libellé du bouton "Retour" en "Fermer"
+                        const retourButton = document.getElementById('retourButton');
+                        retourButton.textContent = 'Fermer';
+
+                    }
+
+
+                    // Fonction pour envoyer les données de mise à jour du professeur à l'API
+                    function updateProfesseur() {
+                        // Récupérer l'ID du professeur à partir du champ masqué
+                        const prof_id = document.getElementById('prof_id').value;
+
+                        // Obtenir l'URL de l'API update pour le professeur
+                        const apiUrlUpdateProf = `http://127.0.0.1:8000/api/prof/edit/${prof_id}`;
+
+                        // Récupérer les valeurs des autres champs du formulaire
+                        const nom = document.getElementById('prof_nom').value;
+                        const prenom = document.getElementById('prof_prenom').value;
+                        const age = document.getElementById('prof_age').value;
+                        const email = document.getElementById('email').value;
+                        const classe = document.getElementById('class').value;
+                        const matiere_id = document.getElementById('matiere_id').value;
+
+                        // Construire l'objet de données à envoyer à l'API
+                        const data = {
+                            nom: nom,
+                            prenom: prenom,
+                            age: age,
+                            email: email,
+                            class: classe,
+                            matiere_id: matiere_id
+                        };
+
+                        // Envoyer la requête PUT à l'API
+                        fetch(apiUrlUpdateProf, {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                },
+                                body: JSON.stringify(data)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+
+                                // Fermer le formulaire de mise à jour après la mise à jour réussie
+                                closeUpdateForm2();
+                            })
+                            .catch(error => {
+                                console.error('Erreur lors de la mise à jour du professeur:', error);
+                            });
+                    }
+
+                    function closeUpdateForm2() {
+                        const updateModal2 = document.getElementById('updateModal2');
+                        updateModal2.classList.add('hidden');
+                        listProfs();
+                    }
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // ...
+
+                        const profForm = document.getElementById('profForm');
+                        profForm.addEventListener('submit', function(event) {
+                            event.preventDefault(); // Empêcher la soumission du formulaire par défaut
+                            updateProfesseur();
+                        });
+
+                        // ...
+                    });
+
+
+
+
+
+
                     function displayMatieresData(data) {
                         // Ajouter les en-têtes spécifiques aux matières
                         const tableHeader = document.querySelector('#tableHeader');
                         tableHeader.innerHTML = `
-                                                <th>ID</th>
-                                                <th>Nom</th>
-                                                <th>Description</th>
-                                                <th>Prof_ID</th>
-                                                <th>Options</th>
-                                                
-                                            `;
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Prof_ID</th>
+                <th>Options</th>
+
+                `;
 
                         const tableBody = document.querySelector('#dataTable tbody');
                         tableBody.innerHTML = ''; // Réinitialiser le contenu du tableau
@@ -627,51 +787,108 @@
                             const row = document.createElement('tr');
                             row.classList.add('bg-white', 'h-10')
                             row.innerHTML = `
-                                            <td class="text-center border">${item.id}</td>
-                                            <td class="text-center border">${item.nom}</td>
-                                            <td class="text-center border">${item.description}</td>
-                                            <td class="text-center border">${item.prof_id}</td>
-                                            <td class="text-center border flex items-center justify-center pt-2">
-                                               <svg class="text-green-500 w-6 h-6" 
-                                                xmlns="http://www.w3.org/2000/svg" 
-                                                fill="none" 
-                                                viewBox="0 0 24 24" 
-                                                stroke-width="1.5" 
-                                                stroke="currentColor" 
-                                                class="w-6 h-6"
-                                                style="cursor: pointer;"
-                                               
-                                            >
-                                                <path stroke-linecap="round" 
-                                                    stroke-linejoin="round" 
-                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                            </svg>
+                <td class="text-center border">${item.id}</td>
+                <td class="text-center border">${item.nom}</td>
+                <td class="text-center border">${item.description}</td>
+                <td class="text-center border">${item.prof.nom}</td>
+                <td class="text-center border flex items-center justify-center pt-2">
+                   <svg class="text-green-500 w-6 h-6 cursor-pointer"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    onclick="openUpdateMatiereForm(${item.id}, '${item.nom}', '${item.description}', ${item.prof_id});">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                    </svg>
 
 
 
-                                            <svg class="text-red-500 w-6 h-6 mx-10 delete-matiere"
-                                                data-id="${item.id}"
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke-width="1.5"
-                                                stroke="currentColor"
-                                                class="w-6 h-6"
-                                                style="cursor: pointer;"
-                                            >
-                                                <path stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                                                />
-                                            </svg>
+                    <svg class="text-red-500 w-6 h-6 mx-10 delete-matiere" data-id="${item.id}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="cursor: pointer;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                    </svg>
 
-                                            </td>
-                                        `;
+                </td>
+                `;
                             tableBody.appendChild(row);
                         });
                     }
 
-                    // ...
+                    // Fonction pour afficher le formulaire de mise à jour de la matière avec les données existantes
+                    function openUpdateMatiereForm(id, nom, description, prof_id) {
+                        // Remplir le formulaire avec les données de la matière sélectionnée
+                        document.getElementById('matiere_id').value = id;
+                        document.getElementById('nom_matiere').value = nom;
+                        document.getElementById('description').value = description;
+                        document.getElementById('prof_id_matiere').value = prof_id;
+
+                        // Afficher la superposition modale pour le formulaire de mise à jour de la matière
+                        const updateMatiereModal = document.getElementById('updateMatiereModal');
+                        updateMatiereModal.classList.remove('hidden');
+
+                        // Changer le libellé du bouton "Retour" en "Fermer"
+                        const retourButton = document.getElementById('retourButton');
+                        retourButton.textContent = 'Fermer';
+                    }
+
+                    // Fonction pour envoyer les données de mise à jour de la matière à l'API
+                    function updateMatiere() {
+                        // Récupérer l'ID de la matière à partir du champ masqué
+                        const matiere_id = document.getElementById('matiere_id').value;
+
+                        // Obtenir l'URL de l'API update pour la matière
+                        const apiUrlUpdateMatiere = `http://127.0.0.1:8000/api/matiere/edit/${matiere_id}`;
+
+                        // Récupérer les valeurs des autres champs du formulaire
+                        const nom = document.getElementById('nom_matiere').value;
+                        const description = document.getElementById('description').value;
+                        const prof_id = document.getElementById('prof_id_matiere').value;
+
+                        // Construire l'objet de données à envoyer à l'API
+                        const data = {
+                            nom: nom,
+                            description: description,
+                            prof_id: prof_id
+                        };
+
+                        // Envoyer la requête PUT à l'API
+                        fetch(apiUrlUpdateMatiere, {
+                                method: 'PUT',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                },
+                                body: JSON.stringify(data)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+
+                                // Fermer le formulaire de mise à jour après la mise à jour réussie
+                                closeUpdateMatiereForm();
+                            })
+                            .catch(error => {
+                                console.error('Erreur lors de la mise à jour de la matière:', error);
+                            });
+                    }
+
+                    function closeUpdateMatiereForm() {
+                        const updateMatiereModal = document.getElementById('updateMatiereModal');
+                        updateMatiereModal.classList.add('hidden');
+                        listMatieres(); // Charger la liste des matières après la mise à jour réussie
+                    }
+
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // ...
+
+                        const matiereForm = document.getElementById('matiereForm');
+                        matiereForm.addEventListener('submit', function(event) {
+                            event.preventDefault(); // Empêcher la soumission du formulaire par défaut
+                            updateMatiere();
+                        });
+
+                        // ...
+                    });
+
 
                     document.addEventListener('click', function(event) {
                         if (event.target.classList.contains('delete-student')) {

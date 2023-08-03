@@ -205,7 +205,7 @@
                         showAlert('Nouvelle matière ajoutée avec succès!', 'success');
                         // Vous pouvez également mettre à jour la liste des matières ici en effectuant une nouvelle requête GET vers l'API pour récupérer les données mises à jour.
                     } else {
-                        showAlert('Une erreur est survenue lors de l\'ajout de la matière.', 'error');
+                        showAlert("le prof que vous avez spécifier n'existe pas", 'error');
                     }
                 } catch (error) {
                     console.error('Erreur lors de la requête vers l\'API:', error);
