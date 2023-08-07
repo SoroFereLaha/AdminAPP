@@ -29,7 +29,7 @@ class StudentTimetableController extends Controller
             'salle' => 'required', //Rule::in(['Salle A', 'Salle B', 'Salle C', 'Salle D', ])],
             'professeur' => 'required', //Rule::in(['Professeur A', 'Professeur B', 'Professeur C', 'Professeur D' ])],
             'matiere' => 'required', //Rule::in(['informatique', 'Patisserie', 'Cuisine', 'Couture', 'Beauté esthétique', 'Coiffure homme', 'Coiffure femme'])],
-            'information' => 'required',
+            'information' => 'nullable',
             // Ajoutez d'autres règles de validation si nécessaire pour les jours 2 à 7
         ]);
 

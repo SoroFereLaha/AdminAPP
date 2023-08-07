@@ -23,42 +23,49 @@ class UsersTableSeeder extends Seeder
         $admin_principal = user::create([
             'name' => 'administrateur principal',
             'email' => 'admin_principal@adminprincipal.com',
+            'photo_path' => 'adminapp_image/user.png',
             'password' => Hash::make('password')
         ]);
 
         $professeur = user::create([
             'name' => 'professeur',
             'email' => 'professeur@professeur.com',
+            'photo_path' => 'adminapp_image/user.png',
             'password' => Hash::make('password')
         ]);
         
         $etudiant = user::create([
             'name' => 'etudiant',
             'email' => 'etudiant@etudiant.com',
+            'photo_path' => 'adminapp_image/user.png',
             'password' => Hash::make('password')
         ]);
 
         $comptable = user::create([
             'name' => 'comptable',
             'email' => 'comptable@comptable.com',
+            'photo_path' => 'adminapp_image/user.png',
             'password' => Hash::make('password')
         ]);
 
         $secretaire = user::create([
             'name' => 'secretaire',
             'email' => 'secretaire@secretaire.com',
+            'photo_path' => 'adminapp_image/user.png',
             'password' => Hash::make('password')
         ]);
 
         $admin_general = user::create([
             'name' => 'administrateur general',
             'email' => 'admin_general@admingeneral.com',
+            'photo_path' => 'adminapp_image/user.png',
             'password' => Hash::make('password')
         ]);
 
         $utilisateur = user::create([
             'name' => 'utilisateur',
             'email' => 'utilisateur@utilisateur.com',
+            'photo_path' => 'adminapp_image/user.png',
             'password' => Hash::make('password')
         ]);
 

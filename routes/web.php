@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/upload-photo', [ProfileController::class, 'uploadPhoto'])->name('profile.upload.photo');
 });
 
 // Admin/UsersController ne fonctionnait pas, <<class does not exist>> alors que la class existe. Alors jai du mettre le chemin complet

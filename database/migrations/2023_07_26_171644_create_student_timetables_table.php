@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('salle');
             $table->string('professeur');
             $table->string('matiere');
-            $table->string('information');
+            $table->string('information')->nullable();
             $table->timestamps();
         });
     }

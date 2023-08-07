@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 
 class UsersController extends Controller
-{
+{   
     //pour restreintre la vue de liste des utilisaterus aux personne connectés
     public function __construct(){
         $this->middleware('auth');
@@ -20,7 +20,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('roles')->get();
+        
         return view('admin.users.index')->with('users', $users);
     }
 

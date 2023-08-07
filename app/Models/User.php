@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'photo_path',
     ];
 
     /**
@@ -45,6 +46,13 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany('App\Models\Role');
+    }
+
+    
+    public function photo_path()
+    {
+        // Remplacez 'photo_path' par le nom du champ qui contient le chemin de la photo de profil dans votre table users.
+        return $this->attributes['photo_path'];
     }
 
     //verifier si un utilisateur est administrateur ou non
