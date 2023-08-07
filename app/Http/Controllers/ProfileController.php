@@ -41,10 +41,14 @@ class ProfileController extends Controller
             $user->photo_path = "/storage/{$imagePath}";
             //dd($user->photo_path);
             $user->save();
+
+            return redirect()->route('profile.edit')->with('status', 'Photo de profil mise à jour avec succès.');
+
+        }else{
+            return redirect()->route('profile.edit')->with('erreur', 'aucune photo n\'a été selectionné.');
         }
         //dd($request->all()) ;
         
-        return redirect()->route('profile.edit')->with('success', 'Photo de profil mise à jour avec succès.');
     }
 
 
