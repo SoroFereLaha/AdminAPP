@@ -51,7 +51,7 @@
                         
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="large_size">Large file input</label>
                         <input name="photo" class="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="large_size" type="file">
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-900" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-900" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 2Mo).</p>
                         <div class="flex justify-start">
                             <button type="button" @click="showImageModal = true" name="action" value="voir" class="bg-blue-800 hover:bg-blue-700 text-white text-xs  font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Voir photo de profil</button>
                             <button type="submit" name="action" value="modifier" id="changePhotoButton" class="ml-4 bg-gray-800 hover:bg-gray-600 text-white text-xs font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Modifier photo de profil</button>
