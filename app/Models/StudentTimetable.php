@@ -15,6 +15,7 @@ class StudentTimetable extends Model
         'salle',
         'professeur',
         'matiere',
+        'groupe',
         'information',
     ];
 }

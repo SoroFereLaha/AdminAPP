@@ -53,8 +53,23 @@ class TeacherTimetableController extends Controller
             'heure_debut' => 'required',
             'heure_fin' => 'required',
             'salle' => 'required', //Rule::in(['Salle A', 'Salle B', 'Salle C', 'Salle D', ])],
-             //Rule::in(['Professeur A', 'Professeur B', 'Professeur C', 'Professeur D' ])],
+            'professeur' => [
+                'required',
+                Rule::unique('teacher_timetables')->where(function ($query) use ($request) {
+                    return $query->where('jour', $request->jour)
+                        ->where('heure_debut', $request->heure_debut)
+                        ->where('professeur', $request->professeur);
+                }),
+            ], //Rule::in(['Professeur A', 'Professeur B', 'Professeur C', 'Professeur D' ])],
             'matiere' => 'required', //Rule::in(['informatique', 'Patisserie', 'Cuisine', 'Couture', 'Beauté esthétique', 'Coiffure homme', 'Coiffure femme'])],
+            'groupe' => [
+                'required',
+                Rule::unique('teacher_timetables')->where(function ($query) use ($request) {
+                    return $query->where('jour', $request->jour)
+                        ->where('heure_debut', $request->heure_debut)
+                        ->where('groupe', $request->groupe);
+                }),
+            ],
             // Ajoutez d'autres règles de validation si nécessaire pour les jours 2 à 7
         ]);
 
@@ -66,6 +81,8 @@ class TeacherTimetableController extends Controller
         $teacherTimetable->heure_fin = $request->heure_fin;
         $teacherTimetable->salle = $request->salle;
         $teacherTimetable->matiere = $request->matiere;
+        $teacherTimetable->groupe = $request->groupe;
+        $teacherTimetable->professeur = $request->professeur;
 
         $teacherTimetable->save();
         //dd($request->all());

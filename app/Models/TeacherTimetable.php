@@ -14,5 +14,7 @@ class TeacherTimetable extends Model
         'heure_fin',
         'salle',
         'matiere',
+        'groupe',
+        'professeur',
     ];
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('salle');
             $table->string('professeur');
             $table->string('matiere');
+            $table->string('groupe');
             $table->string('information')->nullable();
             $table->timestamps();
         });

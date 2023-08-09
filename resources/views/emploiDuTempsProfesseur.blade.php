@@ -64,6 +64,19 @@
                             <label for="matiere1" class="block font-medium">Matière</label>
                             <input type="text" id="matiere1" name="matiere" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
                         </div>
+                        <div class="col-span-1">
+                            <label for="groupe1" class="block font-medium">Groupe</label>
+                            <select id="groupe1" name="groupe" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                                <option value="choisir">Choisir</option>
+                                <option value="groupe 1">Groupe 1</option>
+                                <option value="groupe 2">Groupe 2</option>
+                                <option value="groupe 3">Groupe 3</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1">
+                            <label for="professeur1" class="block font-medium">Professeur</label>
+                            <input type="text" id="professeur1" name="professeur" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                        </div>
                     <!-- Répétez les lignes ci-dessus pour les jours 2 à 7 -->
                     </div>
                     <button type="submit" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Soumettre</button>

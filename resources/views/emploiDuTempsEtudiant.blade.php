@@ -69,6 +69,15 @@
                             <input type="text" id="matiere1" name="matiere" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
+                            <label for="groupe1" class="block font-medium">Groupe</label>
+                            <select id="groupe1" name="groupe" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                                <option value="choisir">Choisir</option>
+                                <option value="groupe 1">Groupe 1</option>
+                                <option value="groupe 2">Groupe 2</option>
+                                <option value="groupe 3">Groupe 3</option>
+                            </select>
+                        </div>
+                        <div class="col-span-1">
                             <label for="information1" class="block font-medium">Information</label>
                             <input type="text" id="information1" name="information" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
                         </div>
