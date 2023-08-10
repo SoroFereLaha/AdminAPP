@@ -35,6 +35,14 @@
                     </div>
                 </div>
             @endif
+            
+            <!--boite modal qui contient la photo-->
+            <div x-show="showImageModal" class="fixed z-50 h-screen w-screen inset-0 overflow-auto bg-black bg-opacity-75 flex justify-center items-center">
+                <div class="max-w-xl h-full overflow-hidden bg-gray-900 p-4 rounded-lg shadow-lg"> 
+                    <img :src="userPhotoPath" alt="Photo de profil" class="max-w-full h-auto">
+                    <button @click="showImageModal = false" class="mt-4 px-4 py-2 bg-white hover:bg-gray-300 text-black rounded">Fermer</button>
+                </div>
+            </div>
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
@@ -60,13 +68,7 @@
                 </div>
             </div>
 
-            <!--boite modal qui contient la photo-->
-            <div x-show="showImageModal" class="fixed z-50 h-screen w-screen inset-0 overflow-auto bg-black bg-opacity-75 flex justify-center items-center">
-                <div class="max-w-xl h-full overflow-hidden bg-gray-900 p-4 rounded-lg shadow-lg"> 
-                    <img :src="userPhotoPath" alt="Photo de profil" class="max-w-full h-auto">
-                    <button @click="showImageModal = false" class="mt-4 px-4 py-2 bg-white hover:bg-gray-300 text-black rounded">Fermer</button>
-                </div>
-            </div>
+
 
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">

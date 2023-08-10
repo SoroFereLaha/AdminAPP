@@ -32,6 +32,8 @@ Route::group(['middleware'=> 'web'], function () {
     Route::get('/teacherTimetable/list', [TeacherTimetableController::class, 'list'])->name('teacherTimetable.list');
     Route::get('/teacherTimetable/show', [TeacherTimetableController::class, 'show'])->name('teacherTimetable.show');  
     Route::post('/teacherTimetable/traitement', [TeacherTimetableController::class, 'add_timetable'])->name('voir_timetable');
+    Route::delete('/teacherTimetable/{id}', [TeacherTimetableController::class, 'destroy'])->name('teacherTimetable.destroy');
+
 
 });
 

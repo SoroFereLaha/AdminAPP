@@ -91,4 +91,14 @@ class TeacherTimetableController extends Controller
         return redirect('/teacherTimetable/show')->with('status', 'L\'emploi du temps a été ajouté avec succès');
         
     }
+
+    public function destroy($id)
+    {
+        try {
+            TeacherTimetable::findOrFail($id)->delete();
+            return redirect()->back()->with('status', 'Ligne supprimée avec succès');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de la suppression');
+        }
+    } 
 }
