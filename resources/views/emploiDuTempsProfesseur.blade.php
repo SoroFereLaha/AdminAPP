@@ -157,25 +157,25 @@
         function confirmDelete(id) {
             document.getElementById('deleteForm-' + id).submit();
         }
-        </script>
-        <script>
-            // Fonction pour afficher la modal
-            function showModal() {
-                var modal = document.getElementById("myModal");
-                modal.style.display = "block";
-            }
-        
-            // Fonction pour cacher la modal
-            function closeModal() {
-                var modal = document.getElementById("myModal");
-                modal.style.display = "none";
-            }
-        
-            // Fonction pour confirmer la suppression
-            function confirmDelete() {
-                // Placez ici le code pour effectuer la suppression de la base de données
-                // Après avoir confirmé la suppression, vous pouvez fermer la modal
-                closeModal();
-            }
-        </script>
+    </script>
+    <script>
+        // Fonction pour afficher la modal
+        function showModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+        }
+    
+        // Fonction pour cacher la modal
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+    
+        // Fonction pour confirmer la suppression
+        function confirmDelete() {
+            // Placez ici le code pour effectuer la suppression de la base de données
+            // Après avoir confirmé la suppression, vous pouvez fermer la modal
+            closeModal();
+        }
+    </script>
 </x-app-layout>

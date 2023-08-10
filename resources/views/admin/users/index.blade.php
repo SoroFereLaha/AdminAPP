@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{ asset('css/voir.css') }}">
 <x-app-layout>
 
         <x-slot name="header">
@@ -6,7 +7,7 @@
                     {{ __(' Listes des utilisateurs ') }}
                 </h2>
             @endcan
-        </x-slot>
+        </x-slot>    
 
     <div class="pt-12  flex">
         <div class="sidebar-container w-1/5">
@@ -55,8 +56,8 @@
                                             <td>
                                                 @can('edit-users')
                                                 <a href="{{ route('admin.users.edit', $user->id) }}">
-                                                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                        Editer
+                                                    <button class=" text-white font-bold py-2 px-1 rounded hover:bg-gray-400">
+                                                        <i class="fa-solid fa-pen-to-square" style="color: #131fcd;" ></i>
                                                     </button>
                                                 </a>
                                                 @endcan
@@ -65,14 +66,48 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="{{ route('admin.users.destroy', $user->id) }}">
-                                                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                            Supprimer
+                                                        <button class=" text-white font-bold py-2 px-1 rounded hover:bg-gray-400">
+                                                            <i class="fa-solid fa-trash-can" style="color: #cd1313;" onclick="showModal()"></i>
                                                         </button>
                                                     </a>
                                                 </form>
+                                                <button class=" text-white font-bold py-2 px-1 rounded hover:bg-gray-400"
+                                                onclick="showModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}')">
+                                                    <i class="fa-sharp fa-solid fa-eye" style="color: #096c15;"></i>
+                                                </button>
                                                 @endcan
                                             </td>
                                         </tr>
+
+
+                                        
+                                        <!-- Modal -->
+                                        <div id="myModal-{{ $user->id }}" class="modal">
+                                            <div class="modal-content bg-white p-4 rounded-lg shadow-md w-1/3 mx-auto mt-20">
+                                                <span class="close float-right text-gray-500 cursor-pointer" onclick="closeModal('{{ $user->id }}')">&times;</span>
+                                                <p class="text-center mb-4">Informations de l'utilisateur :</p>
+                                                <div class="flex justify-center">
+                                                    <div class="block h-40 w-40 mt-7 border-10 bg-[#424549] rounded-full fill-current text-gray-800">
+                                                        <img class="w-full h-full rounded-full" src="{{ asset($user->photo_path) }}" width="auto" height="auto" alt="Large avatar">
+                                                    </div>
+                                                </div>
+                                                <div class="flex justify-center">
+                                                    <p><strong>ID :</strong> <span id="userId-{{ $user->id }}"></span></p>
+                                                </div>
+                                                <div class="flex justify-center">
+                                                    <p><strong>Nom :</strong> <span id="userName-{{ $user->id }}"></span></p>
+                                                </div>
+                                                <div class="flex justify-center">
+                                                    <p><strong>Email :</strong> <span id="userEmail-{{ $user->id }}"></span></p>
+                                                </div>
+                                                <div class="flex justify-center">
+                                                    <button onclick="closeModal('{{ $user->id }}')" class="bg-gray-300 hover:bg-gray-400 text-gray-700 ml-2 px-4 py-2 rounded">
+                                                        OK
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                     @endforeach
 
@@ -87,6 +122,30 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        
+
+        function showModal(id, name, email) {
+            const userIdElement = document.getElementById('userId-' + id);
+            const userNameElement = document.getElementById('userName-' + id);
+            const userEmailElement = document.getElementById('userEmail-' + id);
+
+            userIdElement.textContent = id;
+            userNameElement.textContent = name;
+            userEmailElement.textContent = email;
+
+            var modal = document.getElementById("myModal-" + id);
+            modal.style.display = "block";
+        }
+
+        // Fonction pour cacher la modal
+        function closeModal(id) {
+            var modal = document.getElementById("myModal-" + id);
+            modal.style.display = "none";
+        }
+    </script>    
 
 </x-app-layout>
 
