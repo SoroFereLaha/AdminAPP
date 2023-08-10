@@ -121,9 +121,36 @@
                                 <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->professeur }}</td>
                                 <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->matiere }}</td>
                                 <td class="border border-gray-400 px-4 py-2">{{ $studentTimetable->information }}</td>
+                                <td class="px-4 py-2 hover:cursor-pointer" onclick="confirmDelete(this)" >
+                                    <td class="px-4 py-2 hover:cursor-pointer">
+                                        <i class="fa-solid fa-trash-can" onclick="showModal()"></i>
+                                    </td>
+                                </td>
                             </tr>
                             
                         @endforeach
+                        
+                        
+                        <!-- Modal -->
+                        <div id="myModal" class="modal">
+                            <div class="modal-content bg-white p-4 rounded-lg shadow-md w-1/3 mx-auto mt-20">
+                                <span class="close float-right text-gray-500 cursor-pointer" onclick="closeModal()">&times;</span>
+                                <p class="text-center mb-4">Êtes-vous sûr de vouloir supprimer ?</p>
+                                <div class="flex justify-center">
+                                    <form id="deleteForm-{{ $studentTimetable->id }}" action="{{ route('studentTimetable.destroy', $studentTimetable->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button onclick="confirmDelete()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                                            Confirmer Suppression
+                                        </button>
+                                    </form>
+                                    <button onclick="closeModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-700 ml-2 px-4 py-2 rounded">
+                                        Annuler
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
                         
                     </tbody>
                     @else
@@ -133,4 +160,59 @@
             </div>
         </div>
     </div>
+    
+    <script>
+    function confirmDelete(id) {
+        document.getElementById('deleteForm-' + id).submit();
+    }
+    </script>
+    <script>
+        // Fonction pour afficher la modal
+        function showModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+        }
+    
+        // Fonction pour cacher la modal
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+    
+        // Fonction pour confirmer la suppression
+        function confirmDelete() {
+            // Placez ici le code pour effectuer la suppression de la base de données
+            // Après avoir confirmé la suppression, vous pouvez fermer la modal
+            closeModal();
+        }
+    </script>
+     <style>
+        /* Styles pour la modale */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 20% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+    </style>
+    
 </x-app-layout>

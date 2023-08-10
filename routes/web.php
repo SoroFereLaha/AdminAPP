@@ -24,8 +24,10 @@ Route::group(['middleware'=> 'web'], function () {
     Route::get('/studentTimetable/list', [StudentTimetableController::class, 'list'])->name('studentTimetable.list');
     Route::get('/studentTimetable/show', [StudentTimetableController::class, 'show'])->name('studentTimetable.show');  
     Route::post('/studentTimetable/traitement', [StudentTimetableController::class, 'add_timetable'])->name('view_timetable');
+    Route::delete('/studentTimetable/{id}', [StudentTimetableController::class, 'destroy'])->name('studentTimetable.destroy');
 
 });
+
 Route::group(['middleware'=> 'web'], function () {
     Route::get('/teacherTimetable/list', [TeacherTimetableController::class, 'list'])->name('teacherTimetable.list');
     Route::get('/teacherTimetable/show', [TeacherTimetableController::class, 'show'])->name('teacherTimetable.show');  
