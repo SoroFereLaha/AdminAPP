@@ -8,6 +8,7 @@ use App\Http\Requests\CreateEtudiantRequest;
 use App\Http\Requests\EditEtudiantRequest;
 use App\Models\Etudiant;
 use App\Models\Prof;
+use App\Models\matieres;
 use Illuminate\Http\Request;
 
 class EtudiantController extends Controller
@@ -16,10 +17,12 @@ class EtudiantController extends Controller
     {
         try {
 
+            $etudiants = Etudiant::with('matieres')->get();
+
             return response()->json([
                 'status_code' => 200,
                 'status_message' => 'les etudiant on été récupérés',
-                'data' => Etudiant::all()
+                'data' => $etudiants
 
             ]);
         } catch (Exception $e) {
@@ -36,16 +39,7 @@ class EtudiantController extends Controller
         try {
 
             $prof = Prof::find($request->prof_id);
-
-            if (!$prof) {
-                return response()->json([
-                    'status_code' => 404,
-                    'status_message' => 'Le professeur spécifié n\'existe pas.',
-                    'data' => null
-                ], 404);
-            }
-
-
+            
 
             $post = new Etudiant();
             $post->nom = $request->nom;
@@ -53,6 +47,8 @@ class EtudiantController extends Controller
             $post->age = $request->age;
             $post->genre = $request->genre;
             $post->prof_id = $request->prof_id;
+
+           
 
             if ($post->genre != 'M' && $post->genre != 'F') {
 
@@ -63,7 +59,16 @@ class EtudiantController extends Controller
 
                 ]);
             }
-            $post->save();
+
+        if($post->save()){
+
+                // Attacher les matières à l'étudiant s'il y en a
+                if ($request->has('matieres')) {
+                    $post->matieres()->sync($request->matieres);
+                }
+        }
+            
+
 
            
 
@@ -86,20 +91,19 @@ class EtudiantController extends Controller
 
             $prof = Prof::find($request->prof_id);
 
-            if (!$prof) {
-                return response()->json([
-                    'status_code' => 404,
-                    'status_message' => 'Le professeur spécifié n\'existe pas.',
-                    'data' => null
-                ], 404);
-            }
-
+           
             $post = Etudiant::find($request->id);
             $post->nom = $request->nom;
             $post->prenom = $request->prenom;
             $post->age = $request->age;
             $post->genre = $request->genre;
             $post->prof_id = $request->prof_id;
+
+            // Mettre à jour les matières de l'étudiant si elles sont fournies
+            if ($request->has('matieres')) {
+                $post->matieres()->sync($request->matieres);
+            }
+
 
             if ($post->genre != 'M' && $post->genre != 'F') {
 

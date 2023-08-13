@@ -52,6 +52,7 @@ class MatieresController extends Controller
             $post->nom = $request->nom;
             $post->prof_id = $request->prof_id;
             $post->description = $request->description;
+            $post->groupes = $request->groupes;
             $post->save();
 
             return response()->json([
@@ -75,6 +76,7 @@ class MatieresController extends Controller
             $post->nom = $request->nom;
             $post->prof_id = $request->prof_id;
             $post->description = $request->description;
+            $post->groupes = $request->groupes;
 
             $post->save();
 

@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('matieres', function (Blueprint $table) {
             $table->id();
-            $table->string("nom");
+            $table->string("nom")->unique();
             $table->longText("description")->nullable();
+            $table->char('groupes')->nullable();
             $table->unsignedBigInteger('prof_id')->nullable(); // Nouvelle colonne pour la clé étrangère
             $table->timestamps();
 

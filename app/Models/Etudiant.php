@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Prof;
+use App\Models\matieres;
 
 class Etudiant extends Model
 {
@@ -14,5 +15,10 @@ class Etudiant extends Model
     public function teacher()
     {
         return $this->belongsTo(Prof::class);
+    }
+
+    public function matieres()
+    {
+        return $this->belongsToMany(matieres::class, 'etudiant_matiere', 'etudiant_id', 'matiere_id');
     }
 }

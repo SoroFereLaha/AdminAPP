@@ -419,7 +419,7 @@
                             .then(response => response.json())
                             .then(data => {
                                 displayEtudiantsData(data.data);
-
+                                console.log(data.data);
 
                                 const nombreEtudiantsElement = document.getElementById('nombreEtudiants');
                                 nombreEtudiantsElement.textContent = data.data.length;
@@ -467,7 +467,7 @@
                                                 <th>Prénom</th>
                                                 <th>Âge</th>
                                                 <th>Genre</th>
-                                                <th>Prof_id</th>
+                                                <th>Matières</th>
                                                 <th>Options</th>
                                             `;
 
@@ -483,7 +483,11 @@
                                             <td class="text-center border">${item.prenom}</td>
                                             <td class="text-center border">${item.age ? item.age : ''}</td>
                                             <td class="text-center border">${item.genre }</td>
-                                            <td class="text-center border">${item.prof_id}</td>
+                                            <td class="text-center border">
+                                                            <ul>
+                                                                ${item.matieres.map(matiere => `<li>${matiere.nom}</li>`).join('')}
+                                                            </ul>
+                                                        </td>
                                             <td class="text-center border flex items-center justify-center pt-2">
                                             
                                            <svg class="text-green-500 w-6 h-6"

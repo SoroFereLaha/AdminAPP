@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('prof_id')->nullable();
             $table->timestamps();
             $table->foreign('prof_id')->references('id')->on('profs')->onDelete('set null');
+
         });
     }
 
