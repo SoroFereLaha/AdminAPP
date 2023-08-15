@@ -13,6 +13,33 @@ use Illuminate\Http\Request;
 
 class EtudiantController extends Controller
 {
+
+    public function getEtudiantsByMatiere($matiereId)
+    {
+        try {
+            $matiere = matieres::findOrFail($matiereId); // Assurez-vous que le modèle Matiere est importé
+
+            $etudiants = $matiere->etudiants;
+
+            foreach ($etudiants as $etudiant) {
+                $etudiant->matiere_nom = $matiere->nom; // Ajoutez le nom de la matière à chaque étudiant
+            }
+
+            return response()->json([
+                'status_code' => 200,
+                'status_message' => 'Les étudiants de la matière ont été récupérés',
+                'data' => $etudiants
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status_code' => 404,
+                'status_message' => 'La matière ou les étudiants n\'ont pas été trouvés'
+            ], 404);
+        }
+    }
+
+
+
     public function index()
     {
         try {

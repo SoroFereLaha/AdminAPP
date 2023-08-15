@@ -161,10 +161,17 @@
                                 <option value="F">F</option>
                             </select>
                         </div>
+
                         <div class="mb-4">
-                            <label class="block text-gray-700 font-bold mb-2" for="prof_id">ID Professeur :</label>
-                            <input type="number" id="prof_id" name="prof_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            <label class="block text-gray-700 font-bold mb-2" for="matieres">Matieres :</label>
+                            <div class="relative inline-block w-full">
+                                <select id="matieresDropdown" name="matieres[]" class="border border-gray-300 rounded-md px-3 py-2 w-full bg-white focus:outline-none focus:ring focus:border-blue-300" multiple>
+                                    <!-- Options de matières seront ajoutées ici -->
+                                </select>
+                            </div>
                         </div>
+
+
                         <div class="flex justify-center">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Envoyer</button>
                             <a href="{{ route('admin.users.secretariats.inscriptions') }}">
@@ -183,16 +190,47 @@
         <script>
             const apiUrl = 'http://127.0.0.1:8000/api/etudiant/create';
 
+            const matiereApiUrl = 'http://127.0.0.1:8000/api/matiere';
+            const matieresDropdown = document.querySelector('#matieresDropdown');
+
+            async function fetchMatieres() {
+                try {
+                    const response = await fetch(matiereApiUrl);
+                    const {
+                        data
+                    } = await response.json();
+
+                    if (Array.isArray(data)) {
+                        // Créer les options pour le dropdown
+                        matieresDropdown.innerHTML = '';
+                        data.forEach(matiere => {
+                            const option = document.createElement('option');
+                            option.value = matiere.id;
+                            option.textContent = matiere.nom;
+                            matieresDropdown.appendChild(option);
+                        });
+                    } else {
+                        console.error('La propriété "data" de la réponse de l\'API ne contient pas de tableau de matières.');
+                    }
+                } catch (error) {
+                    console.error('Erreur lors de la récupération des matières:', error);
+                }
+            }
+
+            fetchMatieres();
+
+
             document.querySelector('#studentForm').addEventListener('submit', async (event) => {
                 event.preventDefault();
 
                 const formData = new FormData(event.target);
+                const selectedMatieres = formData.getAll('matieres[]');
                 const data = {
                     nom: formData.get('nom'),
                     prenom: formData.get('prenom'),
                     age: parseInt(formData.get('age')),
                     genre: formData.get('genre'),
-                    prof_id: parseInt(formData.get('prof_id')),
+                    matieres: selectedMatieres.map(Number),
                 };
 
                 // Vérifier si tous les champs sont remplis

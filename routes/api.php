@@ -37,7 +37,7 @@ Route::put('prof/edit/{id}', [ProfController::class, 'update']);
 Route::delete('prof/{post}', [ProfController::class, 'delete']);
 
 //les route poure la table etudiant 
-
+Route::get('matiere/{matiereId}/etudiants', [EtudiantController::class, 'getEtudiantsByMatiere']);
 route::get('etudiant', [EtudiantController::class, 'index']);
 Route::post('etudiant/create', [EtudiantController::class, 'store']);
 Route::put('etudiant/edit/{id}', [EtudiantController::class, 'update']);

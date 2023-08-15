@@ -162,7 +162,7 @@
 
                         <div class="w-80 flex justify-between">
 
-                            <button onclick="listEtudiants()" class="text-white font-bold bg-blue-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Lister</button>
+                            <button onclick="openFilterModal()" class="text-white font-bold bg-blue-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Lister</button>
                             <a href="{{ route('admin.users.secretariats.formEtudiant') }}">
                                 <button class="font-bold bg-green-300 rounded-md mx-10 ring-2 ring-blue-300 h-10 w-20">Ajouter</button>
                             </a>
@@ -170,7 +170,7 @@
 
                         <div class="w-80 h-2/5 flex items-center justify-center">
                             <span id="nombreEtudiants" class="text-4xl font-black text-blue-900 pt-4"></span>
-                            <p class="mx-2 text-xl text-blue-400 italic pt-6">Etudiant</p>
+                            <p class="mx-2 text-xl text-blue-400 italic pt-6">Etudiants</p>
                         </div>
 
                     </div>
@@ -291,13 +291,12 @@
                         </div>
                     </div>
                 </div>
-
-
                 <!-- Ajoutez un élément de superposition modale -->
+
 
                 <div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
                     <div class="w-2/5 bg-white p-4 rounded shadow-lg">
-                        <!-- Votre formulaire de mise à jour ici -->
+                        <!-- formulaire de mise à jour de l'etudiant -->
                         <form id="studentForm" onsubmit="updateEtudiant(); return false;">
                             <input type="hidden" id="etudiantId" name="etudiantId" value="">
                             <div class="mb-4">
@@ -322,6 +321,15 @@
                             <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2" for="prof_id">ID Professeur :</label>
                                 <input type="number" id="prof_id" name="prof_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="matieres">Matieres :</label>
+                                <div class="relative inline-block w-full">
+                                    <select id="matieresDropdown" name="matieres[]" class="border border-gray-300 rounded-md px-3 py-2 w-full bg-white focus:outline-none focus:ring focus:border-blue-300" multiple>
+                                        <!-- Options de matières seront ajoutées ici -->
+                                    </select>
+                                </div>
                             </div>
                             <div class="flex justify-center">
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Envoyer</button>
@@ -399,7 +407,18 @@
                 </div>
 
 
-
+                <!-- Modal de filtre -->
+                <div id="filterModal" class="fixed inset-0 z-50 hidden overflow-auto bg-black bg-opacity-50">
+                    <div class="flex items-center justify-center min-h-screen">
+                        <div class="bg-white p-6 rounded shadow-lg">
+                            <h2 class="text-lg font-semibold mb-4">Choisissez une matière</h2>
+                            <ul id="matieresListModal">
+                                <!-- Les matières seront ajoutées ici dynamiquement -->
+                            </ul>
+                            <button onclick="closeFilterModal()" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Fermer</button>
+                        </div>
+                    </div>
+                </div>
 
                 <script>
                     const apiUrlEtudiant = 'http://127.0.0.1:8000/api/etudiant';
@@ -413,20 +432,62 @@
                     // Définir la variable csrfToken en utilisant la valeur du jeton CSRF récupérée
                     const csrfToken = getCsrfToken();
 
+                    // Fonction pour ouvrir la modal de filtre
+                    function openFilterModal() {
+                        fetch(apiUrlMatiere)
+                            .then(response => response.json())
+                            .then(data => {
+                                const matieresListModal = document.getElementById('matieresListModal');
+                                matieresListModal.innerHTML = '';
+
+                                data.data.forEach(matiere => {
+                                    const matiereItem = document.createElement('li');
+                                    matiereItem.innerHTML = `
+                    <a href="#" onclick="listEtudiantsByMatiere(${matiere.id})" class="text-blue-500 hover:underline">${matiere.nom}</a>
+                `;
+                                    matieresListModal.appendChild(matiereItem);
+                                });
+
+                                // Afficher la modal
+                                const filterModal = document.getElementById('filterModal');
+                                filterModal.classList.remove('hidden');
+                            })
+                            .catch(error => {
+                                console.error('Erreur lors de la récupération des données des matières:', error);
+                            });
+                    }
+
+                    // Fonction pour fermer la modal
+                    function closeFilterModal() {
+                        const filterModal = document.getElementById('filterModal');
+                        filterModal.classList.add('hidden');
+                    }
+
+                    // Fonction pour lister les étudiants par matière
+                    function listEtudiantsByMatiere(matiereId) {
+                        fetch(`${apiUrlMatiere}/${matiereId}/etudiants`)
+                            .then(response => response.json())
+                            .then(data => {
+                                displayEtudiantsData(data.data); // Utilisez votre fonction d'affichage des étudiants ici
+                                const nombreEtudiantsElement = document.getElementById('nombreEtudiants');
+                                nombreEtudiantsElement.textContent = data.data.length;
+
+                                // Fermer la modal après avoir choisi une matière
+                                closeFilterModal();
+                            })
+                            .catch(error => {
+                                console.error('Erreur lors de la récupération des étudiants pour la matière:', error);
+                            });
+                    }
 
                     function listEtudiants() {
                         fetch(apiUrlEtudiant)
                             .then(response => response.json())
                             .then(data => {
                                 displayEtudiantsData(data.data);
-                                console.log(data.data);
-
-                                const nombreEtudiantsElement = document.getElementById('nombreEtudiants');
-                                nombreEtudiantsElement.textContent = data.data.length;
                             })
                             .catch(error => {
                                 console.error('Erreur lors de la récupération des données des étudiants:', error);
-
                             });
                     }
 
@@ -483,11 +544,7 @@
                                             <td class="text-center border">${item.prenom}</td>
                                             <td class="text-center border">${item.age ? item.age : ''}</td>
                                             <td class="text-center border">${item.genre }</td>
-                                            <td class="text-center border">
-                                                            <ul>
-                                                                ${item.matieres.map(matiere => `<li>${matiere.nom}</li>`).join('')}
-                                                            </ul>
-                                                        </td>
+                                            <td class="text-center border">${item.matiere_nom }</td>
                                             <td class="text-center border flex items-center justify-center pt-2">
                                             
                                            <svg class="text-green-500 w-6 h-6"
@@ -498,7 +555,7 @@
                                                 stroke="currentColor"
                                                 class="w-6 h-6"
                                                 style="cursor: pointer;"
-                                                onclick="openUpdateForm(${item.id}, '${item.nom}', '${item.prenom}', ${item.age ? item.age : ''}, '${item.genre}', ${item.prof_id});">
+                                                onclick="openUpdateForm(${item.id}, '${item.nom}', '${item.prenom}', ${item.age ? item.age : ''}, '${item.genre}', ${item.prof_id}, '${item.matiere_nom}');">
                                                 <path stroke-linecap="round" 
                                                     stroke-linejoin="round" 
                                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -524,13 +581,48 @@
                         });
                     }
 
-                    function openUpdateForm(id, nom, prenom, age, genre, prof_id) {
+
+
+                    function openUpdateForm(id, nom, prenom, age, genre, prof_id, matiere_nom) {
                         // Remplir le formulaire avec les données de l'étudiant sélectionné
                         document.getElementById('nom').value = nom;
                         document.getElementById('prenom').value = prenom;
                         document.getElementById('age').value = age;
                         document.getElementById('genre').value = genre;
                         document.getElementById('prof_id').value = prof_id;
+
+                        const matiereApiUrl = 'http://127.0.0.1:8000/api/matiere';
+                        const matieresDropdown = document.querySelector('#matieresDropdown');
+
+                        async function fetchMatieres() {
+                            try {
+                                const response = await fetch(matiereApiUrl);
+                                const {
+                                    data
+                                } = await response.json();
+
+                                if (Array.isArray(data)) {
+                                    // Créer les options pour le dropdown
+                                    matieresDropdown.innerHTML = '';
+                                    data.forEach(matiere => {
+                                        const option = document.createElement('option');
+                                        option.value = matiere.id;
+                                        option.textContent = matiere.nom; // Utiliser le nom de la matière
+                                        matieresDropdown.appendChild(option);
+                                    });
+
+                                    // Sélectionner l'option correspondant à matiere_nom
+                                    const selectedIndex = [...matieresDropdown.options].findIndex(option => option.textContent === matiere_nom);
+                                    matieresDropdown.selectedIndex = selectedIndex;
+                                } else {
+                                    console.error('La propriété "data" de la réponse de l\'API ne contient pas de tableau de matières.');
+                                }
+                            } catch (error) {
+                                console.error('Erreur lors de la récupération des matières:', error);
+                            }
+                        }
+
+                        fetchMatieres();
 
                         // Afficher la superposition modale
                         const updateModal = document.getElementById('updateModal');
@@ -546,7 +638,7 @@
 
                     function updateEtudiant(id) {
                         // Votre code pour afficher le formulaire de mise à jour ici
-                        listEtudiants();
+                        openFilterModal();
                     }
 
 
@@ -569,6 +661,8 @@
                             const age = document.getElementById('age').value;
                             const genre = document.getElementById('genre').value;
                             const prof_id = document.getElementById('prof_id').value;
+                            // Récupérer les matières sélectionnées
+                            const selectedMatieres = Array.from(document.getElementById('matieresDropdown').selectedOptions).map(option => parseInt(option.value));
 
                             // Construire l'objet de données à envoyer à l'API
                             const data = {
@@ -576,7 +670,8 @@
                                 prenom: prenom,
                                 age: age,
                                 genre: genre,
-                                prof_id: prof_id
+                                prof_id: prof_id,
+                                matieres: selectedMatieres
                             };
 
                             // Envoyer la requête PUT à l'API
@@ -590,6 +685,7 @@
                                 })
                                 .then(response => response.json())
                                 .then(data => {
+
                                     closeUpdateForm();
                                 })
                                 .catch(error => {
@@ -756,7 +852,7 @@
                     }
 
                     document.addEventListener('DOMContentLoaded', function() {
-                        // ...
+
 
                         const profForm = document.getElementById('profForm');
                         profForm.addEventListener('submit', function(event) {
@@ -764,7 +860,7 @@
                             updateProfesseur();
                         });
 
-                        // ...
+
                     });
 
 
@@ -779,7 +875,8 @@
                 <th>ID</th>
                 <th>Nom</th>
                 <th>Description</th>
-                <th>Prof_ID</th>
+                <th>Prof_Nom</th>
+                <th>Groupes</th>
                 <th>Options</th>
 
                 `;
@@ -795,6 +892,7 @@
                 <td class="text-center border">${item.nom}</td>
                 <td class="text-center border">${item.description}</td>
                 <td class="text-center border">${item.prof.nom}</td>
+                <td class="text-center border">${item.groupes}</td>
                 <td class="text-center border flex items-center justify-center pt-2">
                    <svg class="text-green-500 w-6 h-6 cursor-pointer"
                     xmlns="http://www.w3.org/2000/svg"
@@ -917,7 +1015,7 @@
                                             throw new Error('La suppression de l\'étudiant a échoué.');
                                         }
                                         // Mettre à jour la liste des étudiants après la suppression réussie
-                                        listEtudiants();
+                                        openFilterModal();
                                         confirmationModalEtudiant.classList.add('hidden');
                                     })
                                     .catch(error => {
@@ -943,7 +1041,7 @@
                                 fetch(`http://127.0.0.1:8000/api/matiere/${matiereId}`, {
                                         method: 'DELETE',
                                         headers: {
-                                            'X-CSRF-TOKEN': csrfToken, // Assurez-vous de définir cette variable en récupérant le jeton CSRF de la balise meta comme indiqué précédemment
+                                            'X-CSRF-TOKEN': csrfToken,
                                             'Content-Type': 'application/json',
                                         },
                                     })
@@ -1006,10 +1104,6 @@
 
 
                 <!-- tableau qui affiche les Api_professeurs  -->
-
-
-
-
 
 
     </x-app-layout>

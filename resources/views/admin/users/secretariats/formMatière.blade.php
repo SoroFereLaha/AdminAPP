@@ -151,6 +151,33 @@
                             <input type="text" id="description" name="description" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
                         </div>
                         <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2">Groupes :</label>
+                            <div class="space-y-2">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="groupes[]" value="A" class="form-checkbox border border-gray-300 rounded-md text-blue-500 focus:ring focus:border-blue-300">
+                                    <span class="ml-2">A</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="groupes[]" value="B" class="form-checkbox border border-gray-300 rounded-md text-blue-500 focus:ring focus:border-blue-300">
+                                    <span class="ml-2">B</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="groupes[]" value="C" class="form-checkbox border border-gray-300 rounded-md text-blue-500 focus:ring focus:border-blue-300">
+                                    <span class="ml-2">C</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="groupes[]" value="D" class="form-checkbox border border-gray-300 rounded-md text-blue-500 focus:ring focus:border-blue-300">
+                                    <span class="ml-2">D</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="groupes[]" value="E" class="form-checkbox border border-gray-300 rounded-md text-blue-500 focus:ring focus:border-blue-300">
+                                    <span class="ml-2">E</span>
+                                </label>
+                                <!-- Ajoutez d'autres cases à cocher pour les groupes -->
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
                             <label class="block text-gray-700 font-bold mb-2" for="prof_id">ID Professeur :</label>
                             <input type="number" id="prof_id" name="prof_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
                         </div>
@@ -180,10 +207,14 @@
                 event.preventDefault();
 
                 const formData = new FormData(event.target);
+
+                const selectedGroups = formData.getAll('groupes[]'); // Récupère toutes les valeurs sélectionnées
+                const concatenatedGroups = selectedGroups.join(','); // Concatène les valeurs avec une virgule entre elles
                 const data = {
                     nom: formData.get('nom'),
                     description: formData.get('description'),
                     prof_id: parseInt(formData.get('prof_id')),
+                    groupes: concatenatedGroups,
                 };
 
                 // Vérifier si tous les champs sont remplis
