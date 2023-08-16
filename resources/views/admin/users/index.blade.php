@@ -62,15 +62,18 @@
                                                 </a>
                                                 @endcan
                                                 @can('delete-users')
+
                                                 <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" class="display: inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="{{ route('admin.users.destroy', $user->id) }}">
-                                                        <button class=" text-white font-bold py-2 px-1 rounded hover:bg-gray-400">
-                                                            <i class="fa-solid fa-trash-can" style="color: #cd1313;" onclick="showModal()"></i>
-                                                        </button>
-                                                    </a>
+
                                                 </form>
+
+                                                <button class="text-white font-bold py-2 px-1 rounded hover:bg-gray-400"
+                                                onclick="showDeleteConfirmation('{{ $user->id }}')">
+                                                    <i class="fa-solid fa-trash-can" style="color: #cd1313;"></i>
+                                                </button>
+
                                                 <button class=" text-white font-bold py-2 px-1 rounded hover:bg-gray-400"
                                                 onclick="showModal('{{ $user->id }}', '{{ $user->name }}', '{{ $user->email }}')">
                                                     <i class="fa-sharp fa-solid fa-eye" style="color: #096c15;"></i>
@@ -79,8 +82,6 @@
                                             </td>
                                         </tr>
 
-
-                                        
                                         <!-- Modal -->
                                         <div id="myModal-{{ $user->id }}" class="modal">
                                             <div class="modal-content bg-white p-4 rounded-lg shadow-md w-1/3 mx-auto mt-20">
@@ -108,9 +109,47 @@
                                             </div>
                                         </div>
 
+                                    <!-- Modal pour confirmer la suppression d'un utilisateur -->
+                                    <div id="deleteConfirmationModal-{{ $user->id }}" class="modal">
+                                        <div class="modal-content bg-white p-4 rounded-lg shadow-md w-1/3 mx-auto mt-20">
+                                            <span class="close float-right text-gray-500 cursor-pointer" onclick="cancelModal({{ $user->id }})">&times;</span>
+                                            <p class="text-center mb-4">Êtes-vous sûr de vouloir supprimer ?</p>
+                                            <div class="flex justify-center">
+                                                <form id="deleteForm-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button onclick="confirmDelete({{ $user->id }})" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
+                                                        Confirmer Suppression
+                                                    </button>
+                                                </form>
+                                                <button onclick="cancelModal({{ $user->id }})" class="bg-gray-300 hover:bg-gray-400 text-gray-700 ml-2 px-4 py-2 rounded">
+                                                    Annuler
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
 
+                                        function showDeleteConfirmation(userId) {
+                                            var modal = document.getElementById("deleteConfirmationModal-" + userId);
+                                            modal.style.display = "block";
+                                        }
+                                    
+                                        function cancelModal(userId) {
+                                            var modal = document.getElementById("deleteConfirmationModal-" + userId);
+                                            modal.style.display = "none";
+                                        }
+                                    
+                                        function confirmDelete(userId) {
+                                            //var deleteForm = document.getElementById("deleteForm");
+                                            //deleteForm.submit(); // Soumet le formulaire de suppression
+                                            cancelModal(userId);
+                                        }
+                                        
+                                    </script> 
                                     @endforeach
 
+                                
                                     </tbody>
                                     </table>
                                 </div>
@@ -124,9 +163,6 @@
     </div>
 
     <script>
-
-        
-
         function showModal(id, name, email) {
             const userIdElement = document.getElementById('userId-' + id);
             const userNameElement = document.getElementById('userName-' + id);
@@ -146,19 +182,4 @@
             modal.style.display = "none";
         }
     </script>    
-
 </x-app-layout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
