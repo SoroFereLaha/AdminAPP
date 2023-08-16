@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Contrainte de clé étrangère
-            $table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('set null');
+            //$table->foreign('matiere_id')->references('id')->on('matieres')->onDelete('set null');
         });
     }
 
@@ -32,3 +32,5 @@ return new class extends Migration
         Schema::dropIfExists('profs');
     }
 };
+
+
