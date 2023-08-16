@@ -27,6 +27,30 @@ class AuthServiceProvider extends ServiceProvider
             //dans la fonction hasanyrole on a dit que le parametre est un tableau
             return $user->hasAnyRole(['','administrateur principal']);
         }); 
+        Gate::define('isAdministrateurGeneral', function($user) {
+            //dans la fonction hasanyrole on a dit que le parametre est un tableau
+            return $user->hasAnyRole(['administrateur principal','administrateur general']);
+        }); 
+        Gate::define('isAdministrateurPrincipal', function($user) {
+            //dans la fonction hasanyrole on a dit que le parametre est un tableau
+            return $user->hasAnyRole(['','administrateur principal']);
+        }); 
+        Gate::define('isEtudiant', function($user) {
+            //dans la fonction hasanyrole on a dit que le parametre est un tableau
+            return $user->hasAnyRole(['administrateur principal','etudiant']);
+        }); 
+        Gate::define('isSecretaire', function($user) {
+            //dans la fonction hasanyrole on a dit que le parametre est un tableau
+            return $user->hasAnyRole(['administrateur principal','secretaire']);
+        }); 
+        Gate::define('isComptable', function($user) {
+            //dans la fonction hasanyrole on a dit que le parametre est un tableau
+            return $user->hasAnyRole(['administrateur principal','comptable']);
+        }); 
+        Gate::define('isProfesseur', function($user) {
+            //dans la fonction hasanyrole on a dit que le parametre est un tableau
+            return $user->hasAnyRole(['administrateur principal','professeur']);
+        }); 
         Gate::define('isNotAdmin', function($user) {
             //dans la fonction hasanyrole on a dit que le parametre est un tableau
             return $user->hasAnyRole(['etudiant','administrateur general', 'secretaire', 'comptable', 'professeur', 'utilisateur']);

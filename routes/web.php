@@ -3,6 +3,8 @@
 use App\Http\Controllers\SecretariatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentTimetableController;
+use App\Http\Controllers\TeacherTimetableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +27,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['middleware'=> 'web'], function () {
+    Route::get('/studentTimetable/list', [StudentTimetableController::class, 'list'])->name('studentTimetable.list');
+    Route::get('/studentTimetable/show', [StudentTimetableController::class, 'show'])->name('studentTimetable.show');  
+    Route::post('/studentTimetable/traitement', [StudentTimetableController::class, 'add_timetable'])->name('view_timetable');
+    Route::delete('/studentTimetable/{id}', [StudentTimetableController::class, 'destroy'])->name('studentTimetable.destroy');
+
+});
+
+Route::group(['middleware'=> 'web'], function () {
+    Route::get('/teacherTimetable/list', [TeacherTimetableController::class, 'list'])->name('teacherTimetable.list');
+    Route::get('/teacherTimetable/show', [TeacherTimetableController::class, 'show'])->name('teacherTimetable.show');  
+    Route::post('/teacherTimetable/traitement', [TeacherTimetableController::class, 'add_timetable'])->name('voir_timetable');
+    Route::delete('/teacherTimetable/{id}', [TeacherTimetableController::class, 'destroy'])->name('teacherTimetable.destroy');
+
+
+});
+
+Route::get('/dashboard', [TeacherTimetableController::class, 'showDashboard'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/profile/upload-photo', [ProfileController::class, 'uploadPhoto'])->name('profile.upload.photo');
 });
 
 // Admin/UsersController ne fonctionnait pas, <<class does not exist>> alors que la class existe. Alors jai du mettre le chemin complet
@@ -41,5 +61,6 @@ Route::middleware('auth')->group(function () {
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('users', 'UsersController');
 });
+
 
 require __DIR__.'/auth.php';

@@ -2,15 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
+use App\Models\User;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use App\Http\Requests\ProfileUpdateRequest;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
+
+    
+    public function uploadPhoto(Request $request)
+    {
+        if ($request->has('action')) {
+            if ($request->input('action') === 'modifier') {
+                //$users = User::all();
+                $user = $request->user();
+
+                $data = $request->validate([
+                    'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                ]);
+
+                $uploadedImage = $request->file('photo');
+                //dd($uploadedImage);
+
+                if(request('photo')){
+                    $imagePath = request('photo')->store('avatar', 'public');
+                    $photo = Image::make(public_path("/storage/{$imagePath}"))->fit(800,800);
+                    $photo->save();
+
+                    $user->photo_path = $photo;
+                    // Mettre à jour le chemin de la photo dans la base de données
+                    $user->photo_path = "/storage/{$imagePath}";
+                    //dd($user->photo_path);
+                    $user->save();
+
+                    return redirect()->route('profile.edit')->with('status', 'Photo de profil mise à jour avec succès.');
+
+                }else{
+                    return redirect()->route('profile.edit')->with('erreur', 'aucune photo n\'a été selectionné.');
+                }
+                //dd($request->all()) ;
+
+            } 
+        }
+
+
+        
+    }
+
+
+
     /**
      * Display the user's profile form.
      */
