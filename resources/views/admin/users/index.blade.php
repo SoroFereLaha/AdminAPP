@@ -26,19 +26,19 @@
                             <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                                 <div class="overflow-hidden">
                                     <table class="min-w-full text-left text-sm font-light">
-                                    <thead class="border-b font-medium ">
-                                        <tr>
-                                        <th scope="col" class="px-6 py-4">#</th>
-                                        <th scope="col" class="px-6 py-4">Nom</th>
-                                        <th scope="col" class="px-6 py-4">Email</th>
-                                        <th scope="col" class="px-6 py-4">Rôle</th>
-                                        <!--seul l'admin peut delete-user donc lui seul verra ca-->
-                                        @can('delete-users')
-                                        <th scope="col" class="px-6 py-4">Action</th>
-                                        @endcan
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                        <thead class="border-b font-medium ">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-4">#</th>
+                                                <th scope="col" class="px-6 py-4">Nom</th>
+                                                <th scope="col" class="px-6 py-4">Email</th>
+                                                <th scope="col" class="px-6 py-4">Rôle</th>
+                                                <!--seul l'admin peut delete-user donc lui seul verra ca-->
+                                                @can('delete-users')
+                                                <th scope="col" class="px-6 py-4">Action</th>
+                                                @endcan
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
                                     @foreach ($users as $user)
                                     
