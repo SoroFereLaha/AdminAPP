@@ -33,101 +33,8 @@
         <div class="pt-12  flex">
             <div class="sidebar-container w-1/5">
                 <!-- <aside id="logo-sidebar" class=" h-100% bottom-0 left-0 z-40 w-64 h-screen pt-10 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-[#424549] dark:border-gray-700" aria-label="Sidebar"> -->
-                <div class="h-full px-3 py-10 pb-4 overflow-y-auto bg-white dark:bg-[#424549]">
-                    <ul class="space-y-2 font-medium">
-                        <li>
-                            <a href="{{route('profile.edit')}}" class="flex items-center p-2 text-black-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                                </svg>
-                                <span class="ml-3">Profile</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('dashboard')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
-                                    <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 whitespace-nowrap">Notifications</span>
-                                <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">9</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
-                                    <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 whitespace-nowrap">Message</span>
-                                <span class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{route('admin.users.index')}}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 whitespace-nowrap">Utilisateurs</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 whitespace-nowrap">Administration</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 whitespace-nowrap">Finance et comptabilité</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.users.secretariats.secretariat') }}" class=" flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 whitespace-nowrap">Secrétariat</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 whitespace-nowrap">Administration générale</span>
-                            </a>
-                        </li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <a href="route('logout')" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700" onclick="event.preventDefault();
-                            this.closest('form').submit();">
-                                    <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span class="flex-1 ml-3 whitespace-nowrap">
-                                        Deconnexion
-                                    </span>
-                                </a>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                <x-sidebar>
+                </x-sidebar>
                 <!-- </aside> -->
             </div>
 
@@ -393,6 +300,14 @@
                                 <label class="block text-gray-700 font-bold mb-2" for="description">Description :</label>
                                 <input type="text" id="description" name="description" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
                             </div>
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2">Groupes :</label>
+                                <select id="groupesSelect" name="groupes[]" multiple class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
+                                    <!-- Options pour les groupes seront ajoutées dynamiquement ici -->
+                                </select>
+                            </div>
+
+
                             <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2" for="prof_id_matiere">ID Professeur :</label>
                                 <input type="number" id="prof_id_matiere" name="prof_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
@@ -876,7 +791,7 @@
                 <th>Nom</th>
                 <th>Description</th>
                 <th>Prof_Nom</th>
-                <th>Groupes</th>
+                <th>Groups</th>
                 <th>Options</th>
 
                 `;
@@ -887,12 +802,14 @@
                         data.forEach(item => {
                             const row = document.createElement('tr');
                             row.classList.add('bg-white', 'h-10')
+                            // Construire la chaîne de noms de groupes
+                            const groupesNames = item.groupes.map(groupe => groupe.nom_group).join(' , ');
                             row.innerHTML = `
                 <td class="text-center border">${item.id}</td>
                 <td class="text-center border">${item.nom}</td>
                 <td class="text-center border">${item.description}</td>
                 <td class="text-center border">${item.prof.nom}</td>
-                <td class="text-center border">${item.groupes}</td>
+                <td class="text-center border">${groupesNames}</td>
                 <td class="text-center border flex items-center justify-center pt-2">
                    <svg class="text-green-500 w-6 h-6 cursor-pointer"
                     xmlns="http://www.w3.org/2000/svg"
@@ -900,7 +817,7 @@
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    onclick="openUpdateMatiereForm(${item.id}, '${item.nom}', '${item.description}', ${item.prof_id});">
+                    onclick="openUpdateMatiereForm(${item.id}, '${item.nom}', '${item.description}', ${item.prof_id}, '${groupesNames}');">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                     </svg>
 
@@ -917,21 +834,55 @@
                     }
 
                     // Fonction pour afficher le formulaire de mise à jour de la matière avec les données existantes
-                    function openUpdateMatiereForm(id, nom, description, prof_id) {
+                    function openUpdateMatiereForm(id, nom, description, prof_id, groupesNames) {
                         // Remplir le formulaire avec les données de la matière sélectionnée
                         document.getElementById('matiere_id').value = id;
                         document.getElementById('nom_matiere').value = nom;
                         document.getElementById('description').value = description;
                         document.getElementById('prof_id_matiere').value = prof_id;
 
-                        // Afficher la superposition modale pour le formulaire de mise à jour de la matière
-                        const updateMatiereModal = document.getElementById('updateMatiereModal');
-                        updateMatiereModal.classList.remove('hidden');
+                        // Récupérer la liste des groupes depuis l'API
+                        fetch('http://127.0.0.1:8000/api/groups')
+                            .then(response => response.json())
+                            // ...
+                            .then(data => {
+                                const groupesSelect = document.getElementById('groupesSelect');
 
-                        // Changer le libellé du bouton "Retour" en "Fermer"
-                        const retourButton = document.getElementById('retourButton');
-                        retourButton.textContent = 'Fermer';
+                                // Réinitialiser les options existantes
+                                groupesSelect.innerHTML = '';
+
+                                // Ajouter les options pour les groupes
+                                data.data.forEach(groupe => {
+                                    const option = document.createElement('option');
+                                    option.value = groupe.id;
+                                    option.textContent = groupe.nom_group;
+                                    groupesSelect.appendChild(option);
+                                    // Cocher les options correspondantes à groupesNames
+                                    if (groupesNames.includes(groupe.nom_group)) {
+                                        option.selected = true;
+                                    }
+                                });
+
+
+
+
+                                // Afficher la superposition modale pour le formulaire de mise à jour de la matière
+                                const updateMatiereModal = document.getElementById('updateMatiereModal');
+                                updateMatiereModal.classList.remove('hidden');
+
+                                // Changer le libellé du bouton "Retour" en "Fermer"
+                                const retourButton = document.getElementById('retourButton');
+                                retourButton.textContent = 'Fermer';
+                            })
+                            // ...
+
+                            .catch(error => {
+                                console.error('Erreur lors de la récupération des groupes:', error);
+                            });
                     }
+
+
+
 
                     // Fonction pour envoyer les données de mise à jour de la matière à l'API
                     function updateMatiere() {
@@ -946,11 +897,16 @@
                         const description = document.getElementById('description').value;
                         const prof_id = document.getElementById('prof_id_matiere').value;
 
+                        // Récupérer les groupes sélectionnés
+                        const groupesSelect = document.getElementById('groupesSelect');
+                        const selectedGroupes = Array.from(groupesSelect.selectedOptions).map(option => option.value);
+
                         // Construire l'objet de données à envoyer à l'API
                         const data = {
                             nom: nom,
                             description: description,
-                            prof_id: prof_id
+                            prof_id: prof_id,
+                            groupes: selectedGroupes
                         };
 
                         // Envoyer la requête PUT à l'API
@@ -972,6 +928,7 @@
                                 console.error('Erreur lors de la mise à jour de la matière:', error);
                             });
                     }
+
 
                     function closeUpdateMatiereForm() {
                         const updateMatiereModal = document.getElementById('updateMatiereModal');

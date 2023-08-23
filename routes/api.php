@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EtudiantController;
+use App\Http\Controllers\Api\GroupesControlle;
 use App\Http\Controllers\Api\MatieresController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ProfController;
@@ -46,9 +47,17 @@ Route::delete('etudiant/{post}', [EtudiantController::class, 'delete']);
 //les route poure la table Matière 
 
 route::get('matiere', [MatieresController::class, 'index']);
+route::get('matiere/{id}/groupes', [MatieresController::class, 'getGroupesByMatiere']);
 Route::post('matiere/create', [MatieresController::class, 'store']);
 Route::put('matiere/edit/{id}', [MatieresController::class, 'update']);
 Route::delete('matiere/{post}', [MatieresController::class, 'delete']);
+
+//les groupe
+
+Route::get('groups', [GroupesControlle::class, 'index']);
+Route::post('groups/create', [GroupesControlle::class, 'store']);
+Route::put('groups/edit/{id}', [GroupesControlle::class, 'update']);
+Route::delete('groups/{post}', [GroupesControlle::class, 'delete']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

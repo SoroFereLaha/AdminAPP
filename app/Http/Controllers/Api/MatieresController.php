@@ -13,10 +13,34 @@ use Illuminate\Http\Request;
 class MatieresController extends Controller
 {
 
+    public function getGroupesByMatiere($id)
+    {
+        try {
+            $matiere = Matieres::with('groupes')->find($id);
+
+            if (!$matiere) {
+                return response()->json([
+                    'status_code' => 404,
+                    'status_message' => 'La matière spécifiée n\'existe pas.',
+                    'data' => null
+                ], 404);
+            }
+
+            return response()->json([
+                'status_code' => 200,
+                'status_message' => 'Groupes associés à la matière récupérés avec succès',
+                'data' => $matiere->groupes
+            ]);
+        } catch (Exception $e) {
+            return response()->json($e);
+        }
+    }
+
+
     public function index()
     {
         try {
-            $matieres = Matieres::with('prof')->get();
+            $matieres = Matieres::with(['prof', 'groupes'])->get();
 
             return response()->json([
                 'status_code' => 200,
@@ -52,8 +76,12 @@ class MatieresController extends Controller
             $post->nom = $request->nom;
             $post->prof_id = $request->prof_id;
             $post->description = $request->description;
-            $post->groupes = $request->groupes;
-            $post->save();
+
+            if ($post->save()) {
+                if ($request->has('groupes')) {
+                    $post->groupes()->sync($request->groupes);
+                }
+            }
 
             return response()->json([
                 'status_code' => 200,
@@ -76,7 +104,10 @@ class MatieresController extends Controller
             $post->nom = $request->nom;
             $post->prof_id = $request->prof_id;
             $post->description = $request->description;
-            $post->groupes = $request->groupes;
+
+            if ($request->has('groupes')) {
+                $post->groupes()->sync($request->groupes);
+            }
 
             $post->save();
 

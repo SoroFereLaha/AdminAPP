@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Prof;
 use App\Models\Etudiant;
+use App\Models\Groupes;
 
 class matieres extends Model
 {
@@ -20,4 +21,10 @@ class matieres extends Model
     {
         return $this->belongsToMany(Etudiant::class, 'etudiant_matiere', 'matiere_id', 'etudiant_id');
     }
+
+    public function groupes()
+    {
+        return $this->belongsToMany(Groupes::class, 'matiere_groupe', 'matiere_id','groupe_id');
+    }
+
 }
