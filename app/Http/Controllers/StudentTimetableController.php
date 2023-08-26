@@ -26,7 +26,15 @@ class StudentTimetableController extends Controller
             'jour' => 'required',
             'heure_debut' => 'required',
             'heure_fin' => 'required', //Rule::in(['Salle A', 'Salle B', 'Salle C', 'Salle D', ])],
-            'salle' => 'required',
+            'salle' => [
+                'required',
+                Rule::in(['Salle 1', 'Salle 2', 'Salle 3', 'Salle 4', ]),
+                Rule::unique('student_timetables')->where(function ($query) use ($request) {
+                    return $query->where('jour', $request->jour)
+                        ->where('heure_debut', $request->heure_debut)
+                        ->where('salle', $request->salle);
+                }),
+            ],
             'professeur' => [
                 'required',
                 Rule::unique('student_timetables')->where(function ($query) use ($request) {
@@ -35,10 +43,14 @@ class StudentTimetableController extends Controller
                         ->where('professeur', $request->professeur);
                 }),
             ], //Rule::in(['Professeur A', 'Professeur B', 'Professeur C', 'Professeur D' ])],
-            'matiere' => 'required', //Rule::in(['informatique', 'Patisserie', 'Cuisine', 'Couture', 'Beauté esthétique', 'Coiffure homme', 'Coiffure femme'])],
+            'matiere' => [
+                'required', 
+                Rule::in(['informatique', 'Patisserie', 'Cuisine', 'Couture', 'Beauté esthétique', 'Coiffure homme', 'Coiffure femme']),
+            ],
             'information' => 'nullable',
             'groupe' => [
                 'required',
+                Rule::in(['Groupe informatique A', 'Groupe informatique B', 'Groupe patisserie  X', 'Groupe patisserie  Y', 'Groupe cuisine X', 'Groupe cuisine Y', 'Groupe couture X', 'Groupe couture Y', 'Groupe beauté esthétique X', 'Groupe beauté esthétique Y', 'Groupe coiffure homme X', 'Groupe coiffure homme Y', 'Groupe coiffure femme X', 'Groupe coiffure femme Y' ]),
                 Rule::unique('student_timetables')->where(function ($query) use ($request) {
                     return $query->where('jour', $request->jour)
                         ->where('heure_debut', $request->heure_debut)
@@ -47,6 +59,7 @@ class StudentTimetableController extends Controller
             ],
             // Ajoutez d'autres règles de validation si nécessaire pour les jours 2 à 7
         ]);
+        
 
 
         $studentTimetable = new StudentTimetable();

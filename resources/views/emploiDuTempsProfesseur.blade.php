@@ -40,7 +40,7 @@
                         <div class="col-span-1">
                         <label for="jour" class="block font-medium">Jour</label>
                         <select id="jour" name="jour" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
-                            <option value="choisir">Choisir</option>
+                            <option value="choisir" selected>Choisir</option>
                             <option value="Lundi">Lundi</option>
                             <option value="Mardi">Mardi</option>
                             <option value="Mercredi">Mercredi</option>
@@ -60,19 +60,30 @@
                         </div>
                         <div class="col-span-1">
                             <label for="salle1" class="block font-medium">Salle</label>
-                            <input type="text" id="salle1" name="salle" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                            <select id="salle1" name="salle" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                                <option value="choisir" selected>Choisir</option>
+                                <option value="Salle 1">Salle 1</option>
+                                <option value="Salle 2">Salle 2</option>
+                                <option value="Salle 3">Salle 3</option>
+                            </select>
                         </div>
                         <div class="col-span-1">
                             <label for="matiere1" class="block font-medium">Matière</label>
-                            <input type="text" id="matiere1" name="matiere" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                            <select id="matiere1" name="matiere" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                                <option value="choisir" selected>Choisir</option>
+                                <option value="informatique">Informatique</option>
+                                <option value="Patisserie">Patisserie</option>
+                                <option value="Cuisine">Cuisine</option>
+                                <option value="Couture">Couture</option>
+                                <option value="Beauté esthétique">Beauté esthétique</option>
+                                <option value="Coiffure homme">Coiffure homme</option>
+                                <option value="Coiffure femme">Coiffure femme</option>
+                            </select>
                         </div>
                         <div class="col-span-1">
                             <label for="groupe1" class="block font-medium">Groupe</label>
                             <select id="groupe1" name="groupe" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
-                                <option value="choisir">Choisir</option>
-                                <option value="groupe 1">Groupe 1</option>
-                                <option value="groupe 2">Groupe 2</option>
-                                <option value="groupe 3">Groupe 3</option>
+                                <option value="choisir" selected>Choisir</option>
                             </select>
                         </div>
                         <div class="col-span-1">
@@ -104,6 +115,7 @@
                             <th class="border border-gray-400 px-4 py-2">Heure fin</th>
                             <th class="border border-gray-400 px-4 py-2">Salle</th>
                             <th class="border border-gray-400 px-4 py-2">Matière</th>
+                            <th class="border border-gray-400 px-4 py-2">Groupe</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -116,6 +128,7 @@
                                 <td class="border border-gray-400 px-4 py-2">{{ $teacherTimetable->heure_fin }}</td>
                                 <td class="border border-gray-400 px-4 py-2">{{ $teacherTimetable->salle }}</td>
                                 <td class="border border-gray-400 px-4 py-2">{{ $teacherTimetable->matiere }}</td>
+                                <td class="border border-gray-400 px-4 py-2">{{ $teacherTimetable->groupe }}</td>
                                 <td class="px-4 py-2 hover:cursor-pointer" onclick="confirmDelete(this)" >
                                     <td class="px-4 py-2 hover:cursor-pointer">
                                         <i class="fa-solid fa-trash-can" onclick="showModal()"></i>
@@ -177,5 +190,51 @@
             // Après avoir confirmé la suppression, vous pouvez fermer la modal
             closeModal();
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var champ1 = document.getElementById('matiere1');
+            var champ2 = document.getElementById('groupe1');
+
+            champ1.addEventListener('change', function () {
+                var valeurChamp1 = champ1.value;
+
+                // Supprimer les options actuelles de champ2
+                champ2.innerHTML = '';
+
+                // Ajouter de nouvelles options en fonction de la valeur de champ1
+                if (valeurChamp1 === 'informatique') {
+                    champ2.appendChild(createOption('Groupe informatique A', 'Groupe informatique A'));
+                    champ2.appendChild(createOption('Groupe informatique B', 'Groupe informatique B'));
+                } else if (valeurChamp1 === 'Patisserie') {
+                    champ2.appendChild(createOption('Groupe patisserie x', 'Groupe patisserie  X'));
+                    champ2.appendChild(createOption('Groupe patisserie Y', 'Groupe patisserie Y'));
+                } else if (valeurChamp1 === 'Cuisine') {
+                    champ2.appendChild(createOption('Groupe cuisine X', 'Groupe cuisine X'));
+                    champ2.appendChild(createOption('Groupe cuisine Y', 'Groupe cuisine Y'));
+                } else if (valeurChamp1 === 'Couture') {
+                    champ2.appendChild(createOption('Groupe couture X', 'Groupe couture X'));
+                    champ2.appendChild(createOption('Groupe couture Y', 'Groupe couture Y'));
+                } else if (valeurChamp1 === 'Beauté esthétique') {
+                    champ2.appendChild(createOption('Groupe beauté esthétique X', 'Groupe beauté esthétique X'));
+                    champ2.appendChild(createOption('Groupe beauté esthétique Y', 'Groupe beauté esthétique Y'));
+                } else if (valeurChamp1 === 'Coiffure homme') {
+                    champ2.appendChild(createOption('Groupe coiffure homme X', 'Groupe coiffure homme X'));
+                    champ2.appendChild(createOption('Groupe coiffure homme Y', 'Groupe coiffure homme Y'));
+                } else if (valeurChamp1 === 'Coiffure femme') {
+                    champ2.appendChild(createOption('Groupe coiffure femme X', 'Groupe coiffure femme X'));
+                    champ2.appendChild(createOption('Groupe coiffure femme Y', 'Groupe coiffure femme Y'));
+                } else {
+                    champ2.appendChild(createOption('choisir', 'Choisir'));
+                }
+            });
+
+            // Fonction pour créer une option
+            function createOption(value, text) {
+                var option = document.createElement('option');
+                option.value = value;
+                option.text = text;
+                return option;
+            }
+        });
     </script>
 </x-app-layout>
