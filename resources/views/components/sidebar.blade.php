@@ -94,7 +94,7 @@
                     <a href="{{ route('admin.users.secretariats.inscriptions') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Inscriptions</a>
                 </li>
                 <li>
-                    <a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Payements</a>
+                    <a href="{{ route('admin.users.secretariats.Absences') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Les Absences</a>
                 </li>
             </ul>
         </li>

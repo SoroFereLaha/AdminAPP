@@ -225,19 +225,28 @@
                                     <option value="F">F</option>
                                 </select>
                             </div>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 font-bold mb-2" for="prof_id">ID Professeur :</label>
-                                <input type="number" id="prof_id" name="prof_id" min="0" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
-                            </div>
+
 
                             <div class="mb-4">
-                                <label class="block text-gray-700 font-bold mb-2" for="matieres">Matieres :</label>
+                                <label class="block text-gray-700 font-bold mb-2" for="matiere">Matiere :</label>
                                 <div class="relative inline-block w-full">
-                                    <select id="matieresDropdown" name="matieres[]" class="border border-gray-300 rounded-md px-3 py-2 w-full bg-white focus:outline-none focus:ring focus:border-blue-300" multiple>
+                                    <select id="matieresDropdown" name="matiere" class="border border-gray-300 rounded-md px-3 py-2 w-full bg-white focus:outline-none focus:ring focus:border-blue-300">
                                         <!-- Options de matières seront ajoutées ici -->
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="Groupes">Groupes :</label>
+                                <div class="relative inline-block w-full">
+                                    <select id="GroupesDropdown" name="Groupes" class="border border-gray-300 rounded-md px-3 py-2 w-full bg-white focus:outline-none focus:ring focus:border-blue-300">
+                                        <!-- Options de groupes seront ajoutées ici -->
+                                    </select>
+                                </div>
+                            </div>
+
+
+
                             <div class="flex justify-center">
                                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300">Envoyer</button>
                                 <button type="button" id="retourButton" class="ml-4 bg-red-500  text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring focus:border-blue-300" onclick="closeUpdateForm()">Retour</button>
@@ -383,7 +392,8 @@
                         fetch(`${apiUrlMatiere}/${matiereId}/etudiants`)
                             .then(response => response.json())
                             .then(data => {
-                                displayEtudiantsData(data.data); // Utilisez votre fonction d'affichage des étudiants ici
+                                displayEtudiantsData(data.data);
+                                console.log(data.data);
                                 const nombreEtudiantsElement = document.getElementById('nombreEtudiants');
                                 nombreEtudiantsElement.textContent = data.data.length;
 
@@ -444,6 +454,7 @@
                                                 <th>Âge</th>
                                                 <th>Genre</th>
                                                 <th>Matières</th>
+                                                <th>Groupes</th>
                                                 <th>Options</th>
                                             `;
 
@@ -460,6 +471,7 @@
                                             <td class="text-center border">${item.age ? item.age : ''}</td>
                                             <td class="text-center border">${item.genre }</td>
                                             <td class="text-center border">${item.matiere_nom }</td>
+                                            <td class="text-center border">${item.groups }</td>
                                             <td class="text-center border flex items-center justify-center pt-2">
                                             
                                            <svg class="text-green-500 w-6 h-6"
@@ -470,7 +482,7 @@
                                                 stroke="currentColor"
                                                 class="w-6 h-6"
                                                 style="cursor: pointer;"
-                                                onclick="openUpdateForm(${item.id}, '${item.nom}', '${item.prenom}', ${item.age ? item.age : ''}, '${item.genre}', ${item.prof_id}, '${item.matiere_nom}');">
+                                                onclick="openUpdateForm(${item.id}, '${item.nom}', '${item.prenom}', ${item.age ? item.age : ''}, '${item.genre}', '${item.matiere_nom}');">
                                                 <path stroke-linecap="round" 
                                                     stroke-linejoin="round" 
                                                     d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
@@ -496,20 +508,26 @@
                         });
                     }
 
+                    
 
 
-                    function openUpdateForm(id, nom, prenom, age, genre, prof_id, matiere_nom) {
+                    function openUpdateForm(id, nom, prenom, age, genre, matiere_nom) {
                         // Remplir le formulaire avec les données de l'étudiant sélectionné
                         document.getElementById('nom').value = nom;
                         document.getElementById('prenom').value = prenom;
                         document.getElementById('age').value = age;
                         document.getElementById('genre').value = genre;
-                        document.getElementById('prof_id').value = prof_id;
 
-                        const matiereApiUrl = 'http://127.0.0.1:8000/api/matiere';
                         const matieresDropdown = document.querySelector('#matieresDropdown');
+                        const groupesDropdown = document.querySelector('#GroupesDropdown');
+
+                        
+
 
                         async function fetchMatieres() {
+                            const matiereApiUrl = 'http://127.0.0.1:8000/api/matiere';
+
+
                             try {
                                 const response = await fetch(matiereApiUrl);
                                 const {
@@ -517,18 +535,20 @@
                                 } = await response.json();
 
                                 if (Array.isArray(data)) {
-                                    // Créer les options pour le dropdown
                                     matieresDropdown.innerHTML = '';
                                     data.forEach(matiere => {
                                         const option = document.createElement('option');
                                         option.value = matiere.id;
-                                        option.textContent = matiere.nom; // Utiliser le nom de la matière
+                                        option.textContent = matiere.nom;
                                         matieresDropdown.appendChild(option);
                                     });
 
                                     // Sélectionner l'option correspondant à matiere_nom
                                     const selectedIndex = [...matieresDropdown.options].findIndex(option => option.textContent === matiere_nom);
                                     matieresDropdown.selectedIndex = selectedIndex;
+
+                                    // Appeler la fonction pour mettre à jour les options de groupe en fonction de la matière sélectionnée
+                                    updateGroupesOptions(selectedIndex);
                                 } else {
                                     console.error('La propriété "data" de la réponse de l\'API ne contient pas de tableau de matières.');
                                 }
@@ -537,7 +557,40 @@
                             }
                         }
 
+
+                        async function updateGroupesOptions(selectedMatiereId) {
+                            groupesDropdown.innerHTML = ''; // Effacer les options existantes
+
+                            try {
+                                const response = await fetch(`http://127.0.0.1:8000/api/matiere/${selectedMatiereId}/groupes`);
+                                const {
+                                    data
+                                } = await response.json();
+
+                                if (Array.isArray(data)) {
+                                    data.forEach(groupe => {
+                                        const option = document.createElement('option');
+                                        option.value = groupe.nom_group;
+                                        option.textContent = groupe.nom_group;
+                                        groupesDropdown.appendChild(option);
+                                    });
+
+                                    // Sélectionner l'option correspondant au groupe déjà sélectionné (s'il existe)
+                                    const selectedGroup = document.getElementById('GroupesDropdown').value;
+                                    if (selectedGroup) {
+                                        groupesDropdown.value = selectedGroup;
+                                    }
+                                }
+                            } catch (error) {
+                                console.error('Erreur lors de la récupération des groupes associés à la matière:', error);
+                            }
+                        }
+
+
                         fetchMatieres();
+
+                      
+
 
                         // Afficher la superposition modale
                         const updateModal = document.getElementById('updateModal');
@@ -575,9 +628,12 @@
                             const prenom = document.getElementById('prenom').value;
                             const age = document.getElementById('age').value;
                             const genre = document.getElementById('genre').value;
-                            const prof_id = document.getElementById('prof_id').value;
+
                             // Récupérer les matières sélectionnées
                             const selectedMatieres = Array.from(document.getElementById('matieresDropdown').selectedOptions).map(option => parseInt(option.value));
+
+                            // Récupérer le groupe sélectionné
+                            const selectedGroup = document.getElementById('GroupesDropdown').value;
 
                             // Construire l'objet de données à envoyer à l'API
                             const data = {
@@ -585,9 +641,11 @@
                                 prenom: prenom,
                                 age: age,
                                 genre: genre,
-                                prof_id: prof_id,
+                                groups: selectedGroup,
                                 matieres: selectedMatieres
                             };
+                            console.log(data);
+
 
                             // Envoyer la requête PUT à l'API
                             fetch(apiUrlUpdate, {
@@ -598,14 +656,15 @@
                                     },
                                     body: JSON.stringify(data)
                                 })
+
                                 .then(response => response.json())
                                 .then(data => {
-
                                     closeUpdateForm();
                                 })
                                 .catch(error => {
                                     console.error('Erreur lors de la mise à jour de l\'étudiant:', error);
                                 });
+
                         });
                     });
 

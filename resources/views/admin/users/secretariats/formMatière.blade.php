@@ -153,7 +153,7 @@
 
                     if (response.ok) {
                         showAlert('Nouvelle matière ajoutée avec succès!', 'success');
-                        // Vous pouvez également mettre à jour la liste des matières ici en effectuant une nouvelle requête GET vers l'API pour récupérer les données mises à jour.
+                    
                     } else {
                         showAlert("le prof que vous avez spécifier n'existe pas", 'error');
                     }

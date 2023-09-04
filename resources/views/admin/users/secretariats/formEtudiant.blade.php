@@ -109,15 +109,16 @@
             const matieresDropdown = document.querySelector('#matieresDropdown');
             const groupesDropdown = document.querySelector('#groupesDropdown');
 
+            let data = [];
+
             async function fetchMatieres() {
                 try {
                     const response = await fetch(matiereApiUrl);
-                    const {
-                        data
-                    } = await response.json();
+                    const responseData = await response.json();
 
-                    if (Array.isArray(data)) {
-                        // Créer les options pour le dropdown
+                    if (Array.isArray(responseData.data)) {
+
+                        data = responseData.data;
                         matieresDropdown.innerHTML = '';
                         data.forEach(matiere => {
                             const option = document.createElement('option');
@@ -187,23 +188,53 @@
 
                 const formData = new FormData(event.target);
                 const matieres = selectedMatieres.map(Number);
-                const groupes = {};
 
-                selectedMatieres.forEach(matiereId => {
-                    groupes[matiereId] = formData.get(`groupes[${matiereId}]`);
-                });
+                for (const matiereId of matieres) {
+                    const matiere = data.find(matiere => matiere.id === matiereId);
+                    if (!matiere) {
+                        console.error(`Matière avec ID ${matiereId} non trouvée dans les données.`);
+                        continue;
+                    }
 
-                const data = {
-                    nom: formData.get('nom'),
-                    prenom: formData.get('prenom'),
-                    age: parseInt(formData.get('age')),
-                    genre: formData.get('genre'),
-                    matieres,
-                    groupes,
-                };
+                    const groupeId = formData.get(`groupes[${matiereId}]`);
+                    const groupeNom = groupesContainer.querySelector(`select[name="groupes[${matiereId}]"] option[value="${groupeId}"]`).textContent;
 
-                // ... Le reste de votre code pour la soumission du formulaire ...
+                    const etudiantData = {
+                        nom: formData.get('nom'),
+                        prenom: formData.get('prenom'),
+                        age: parseInt(formData.get('age')),
+                        genre: formData.get('genre'),
+                        matieres: [matiereId], // Utiliser l'ID de la matière
+                        groups: `${matiere.nom}: ${groupeNom}`, // Utiliser la chaîne formatée pour les groupes
+                    };
+
+                    console.log('Données à envoyer à l\'API :', etudiantData);
+
+                    try {
+                        // Envoi des données à l'API pour ajouter l'étudiant
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(etudiantData),
+                        });
+
+                        if (response.ok) {
+                            showAlert('Étudiant ajouté avec succès.', 'success');
+                            const responseData = await response.json(); // Récupérer la réponse de l'API
+                            console.log('Réponse de l\'API :', responseData);
+                        } else {
+                            showAlert('Une erreur est survenue lors de l\'ajout de l\'étudiant.', 'error');
+                        }
+                    } catch (error) {
+                        console.error('Erreur lors de l\'ajout de l\'étudiant:', error);
+                        showAlert('Une erreur est survenue lors de l\'ajout de l\'étudiant.', 'error');
+                    }
+                }
             });
+
+
 
 
             function showAlert(message, type) {
@@ -225,8 +256,6 @@
                     alertElement.remove();
                 }, 5000);
             }
-
-            // ... Reste du code ...
         </script>
 
 

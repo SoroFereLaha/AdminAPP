@@ -9,7 +9,7 @@ class SecretariatController extends Controller
 {
     public function index() {
 
-        return view('admin.users.secretariats.secretariat',);
+        return view('admin.users.secretariats.Absences',);
         
     }
 

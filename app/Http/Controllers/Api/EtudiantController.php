@@ -73,6 +73,7 @@ class EtudiantController extends Controller
             $post->prenom = $request->prenom;
             $post->age = $request->age;
             $post->genre = $request->genre;
+            $post->groups = $request->groups;
             $post->prof_id = $request->prof_id;
 
            
@@ -87,14 +88,12 @@ class EtudiantController extends Controller
                 ]);
             }
 
-        if($post->save()){
-
-                // Attacher les matières à l'étudiant s'il y en a
+            if ($post->save()) {
                 if ($request->has('matieres')) {
                     $post->matieres()->sync($request->matieres);
                 }
-        }
-            
+            }
+
 
 
            
@@ -124,6 +123,7 @@ class EtudiantController extends Controller
             $post->prenom = $request->prenom;
             $post->age = $request->age;
             $post->genre = $request->genre;
+            $post->groups = $request->groups;
             $post->prof_id = $request->prof_id;
 
             // Mettre à jour les matières de l'étudiant si elles sont fournies

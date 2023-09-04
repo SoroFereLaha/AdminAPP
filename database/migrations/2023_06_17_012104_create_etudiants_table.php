@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('prenom');
             $table->integer('age');
             $table->string('genre');
+            $table->string('groups');
             // Clé étrangère pour la référence au professeur
             $table->unsignedBigInteger('prof_id')->nullable();
             $table->timestamps();

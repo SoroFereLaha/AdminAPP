@@ -10,7 +10,7 @@ use App\Models\matieres;
 class Etudiant extends Model
 {
     use HasFactory;
-    protected $fillable = ['nom', 'prenom', 'age', 'genre', 'prof_id'];
+    protected $fillable = ['nom', 'prenom', 'age', 'genre', 'prof_id', 'matieres_groupes']; 
 
     public function teacher()
     {
@@ -20,5 +20,7 @@ class Etudiant extends Model
     public function matieres()
     {
         return $this->belongsToMany(matieres::class, 'etudiant_matiere', 'etudiant_id', 'matiere_id');
+
     }
+    
 }
