@@ -69,19 +69,16 @@
                         </div>
                         <div class="col-span-1">
                             <label for="professeur1" class="block font-medium">Professeur</label>
-                            <input type="text" id="professeur1" name="professeur" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                            <select id="professeur1" name="professeur" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
+                                <option value="choisir" selected>Choisir</option>
+                                
+                            </select>
                         </div>
                         <div class="col-span-1">
                             <label for="matiere1" class="block font-medium">Matière</label>
                             <select id="matiere1" name="matiere" class="w-full mt-1 p-2 border border-gray-300 rounded-md">
                                 <option value="choisir" selected>Choisir</option>
-                                <option value="informatique">Informatique</option>
-                                <option value="Patisserie">Patisserie</option>
-                                <option value="Cuisine">Cuisine</option>
-                                <option value="Couture">Couture</option>
-                                <option value="Beauté esthétique">Beauté esthétique</option>
-                                <option value="Coiffure homme">Coiffure homme</option>
-                                <option value="Coiffure femme">Coiffure femme</option>
+                                
                             </select>
                         </div>
                         <div class="col-span-1">
@@ -176,77 +173,6 @@
         </div>
     </div>
     
-    <script>
-    function confirmDelete(id) {
-        document.getElementById('deleteForm-' + id).submit();
-    }
-    </script>
-    <script>
-        // Fonction pour afficher la modal
-        function showModal() {
-            var modal = document.getElementById("myModal");
-            modal.style.display = "block";
-        }
-    
-        // Fonction pour cacher la modal
-        function closeModal() {
-            var modal = document.getElementById("myModal");
-            modal.style.display = "none";
-        }
-    
-        // Fonction pour confirmer la suppression
-        function confirmDelete() {
-            // Placez ici le code pour effectuer la suppression de la base de données
-            // Après avoir confirmé la suppression, vous pouvez fermer la modal
-            closeModal();
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            var champ1 = document.getElementById('matiere1');
-            var champ2 = document.getElementById('groupe1');
-
-            champ1.addEventListener('change', function () {
-                var valeurChamp1 = champ1.value;
-
-                // Supprimer les options actuelles de champ2
-                champ2.innerHTML = '';
-
-                // Ajouter de nouvelles options en fonction de la valeur de champ1
-                if (valeurChamp1 === 'informatique') {
-                    champ2.appendChild(createOption('Groupe informatique A', 'Groupe informatique A'));
-                    champ2.appendChild(createOption('Groupe informatique B', 'Groupe informatique B'));
-                } else if (valeurChamp1 === 'Patisserie') {
-                    champ2.appendChild(createOption('Groupe patisserie x', 'Groupe patisserie  X'));
-                    champ2.appendChild(createOption('Groupe patisserie Y', 'Groupe patisserie Y'));
-                } else if (valeurChamp1 === 'Cuisine') {
-                    champ2.appendChild(createOption('Groupe cuisine X', 'Groupe cuisine X'));
-                    champ2.appendChild(createOption('Groupe cuisine Y', 'Groupe cuisine Y'));
-                } else if (valeurChamp1 === 'Couture') {
-                    champ2.appendChild(createOption('Groupe couture X', 'Groupe couture X'));
-                    champ2.appendChild(createOption('Groupe couture Y', 'Groupe couture Y'));
-                } else if (valeurChamp1 === 'Beauté esthétique') {
-                    champ2.appendChild(createOption('Groupe beauté esthétique X', 'Groupe beauté esthétique X'));
-                    champ2.appendChild(createOption('Groupe beauté esthétique Y', 'Groupe beauté esthétique Y'));
-                } else if (valeurChamp1 === 'Coiffure homme') {
-                    champ2.appendChild(createOption('Groupe coiffure homme X', 'Groupe coiffure homme X'));
-                    champ2.appendChild(createOption('Groupe coiffure homme Y', 'Groupe coiffure homme Y'));
-                } else if (valeurChamp1 === 'Coiffure femme') {
-                    champ2.appendChild(createOption('Groupe coiffure femme X', 'Groupe coiffure femme X'));
-                    champ2.appendChild(createOption('Groupe coiffure femme Y', 'Groupe coiffure femme Y'));
-                } else {
-                    champ2.appendChild(createOption('choisir', 'Choisir'));
-                }
-            });
-
-            // Fonction pour créer une option
-            function createOption(value, text) {
-                var option = document.createElement('option');
-                option.value = value;
-                option.text = text;
-                return option;
-            }
-        });
-
-    </script>
+   <script src={{ asset('js/emploiEtudiant.js') }}></script>
     
 </x-app-layout>
