@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Prof;
+use App\Models\Absence;
 use App\Models\matieres;
 
 class Etudiant extends Model
@@ -22,5 +23,9 @@ class Etudiant extends Model
         return $this->belongsToMany(matieres::class, 'etudiant_matiere', 'etudiant_id', 'matiere_id');
 
     }
-    
+
+    public function absences()
+    {
+        return $this->hasMany(Absence::class, 'etudiant_id');
+    }
 }

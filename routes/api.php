@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AbsencesControlle;
 use App\Http\Controllers\Api\EtudiantController;
 use App\Http\Controllers\Api\GroupesControlle;
 use App\Http\Controllers\Api\MatieresController;
@@ -58,6 +59,13 @@ Route::get('groups', [GroupesControlle::class, 'index']);
 Route::post('groups/create', [GroupesControlle::class, 'store']);
 Route::put('groups/edit/{id}', [GroupesControlle::class, 'update']);
 Route::delete('groups/{post}', [GroupesControlle::class, 'delete']);
+
+
+//les Absences
+Route::get('absence', [AbsencesControlle::class, 'index']);
+Route::get('/absence/{etudiantId}', [AbsencesControlle::class, 'listByStudent']);
+Route::post('absence/create', [AbsencesControlle::class, 'store']);
+Route::delete('absence/{post}', [AbsencesControlle::class, 'delete']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

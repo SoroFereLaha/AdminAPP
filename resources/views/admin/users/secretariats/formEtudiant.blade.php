@@ -205,7 +205,7 @@
                         age: parseInt(formData.get('age')),
                         genre: formData.get('genre'),
                         matieres: [matiereId], // Utiliser l'ID de la matière
-                        groups: `${matiere.nom}: ${groupeNom}`, // Utiliser la chaîne formatée pour les groupes
+                        groups: `${groupeNom}`, // Utiliser la chaîne formatée pour les groupes
                     };
 
                     console.log('Données à envoyer à l\'API :', etudiantData);

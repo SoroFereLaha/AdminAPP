@@ -17,12 +17,12 @@ class EtudiantController extends Controller
     public function getEtudiantsByMatiere($matiereId)
     {
         try {
-            $matiere = matieres::findOrFail($matiereId); // Assurez-vous que le modèle Matiere est importé
+            $matiere = matieres::findOrFail($matiereId); 
 
             $etudiants = $matiere->etudiants;
 
             foreach ($etudiants as $etudiant) {
-                $etudiant->matiere_nom = $matiere->nom; // Ajoutez le nom de la matière à chaque étudiant
+                $etudiant->matiere_nom = $matiere->nom; 
             }
 
             return response()->json([
@@ -44,7 +44,7 @@ class EtudiantController extends Controller
     {
         try {
 
-            $etudiants = Etudiant::with('matieres')->get();
+            $etudiants = Etudiant::with(['matieres','absences'])->get();
 
             return response()->json([
                 'status_code' => 200,
