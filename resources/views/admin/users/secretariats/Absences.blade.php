@@ -184,7 +184,7 @@
                     fetch(apiUrlEtudiant)
                         .then(response => response.json())
                         .then(result => {
-                            data = result.data; // Mettez à jour la variable data avec les données récupérées.
+                            data = result.data; 
                             displayEtudiantsData(data);
                             console.log(data);
 

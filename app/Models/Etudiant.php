@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Prof;
 use App\Models\Absence;
+use App\Models\Payement;
 use App\Models\matieres;
 
 class Etudiant extends Model
@@ -27,5 +28,10 @@ class Etudiant extends Model
     public function absences()
     {
         return $this->hasMany(Absence::class, 'etudiant_id');
+    }
+    
+    public function payement()
+    {
+        return $this->hasMany(Payement::class, 'etudiant_id');
     }
 }

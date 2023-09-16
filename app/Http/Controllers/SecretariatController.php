@@ -12,6 +12,12 @@ class SecretariatController extends Controller
         return view('admin.users.secretariats.Absences',);
         
     }
+    
+    public function payements() {
+
+        return view('admin.users.secretariats.payements',);
+        
+    }
 
     public function inscrit()
     {

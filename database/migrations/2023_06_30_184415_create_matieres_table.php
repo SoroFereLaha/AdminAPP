@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("nom")->unique();
             $table->longText("description")->nullable();
+            $table->decimal("prix")->nullable();
             $table->unsignedBigInteger('prof_id')->nullable(); // Nouvelle colonne pour la clé étrangère
             $table->timestamps();
 

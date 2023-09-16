@@ -310,6 +310,13 @@
                                 <input type="text" id="description" name="description" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
                             </div>
                             <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="prix">Prix :</label>
+                                <div class="flex">
+                                    <input type="number" id="prix" name="prix" min="0" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+                                    <span class="ml-2">DH</span>
+                                </div>
+                            </div>
+                            <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2">Groupes :</label>
                                 <select id="groupesSelect" name="groupes[]" multiple class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
                                     <!-- Options pour les groupes seront ajoutées dynamiquement ici -->
@@ -849,14 +856,15 @@
                         // Ajouter les en-têtes spécifiques aux matières
                         const tableHeader = document.querySelector('#tableHeader');
                         tableHeader.innerHTML = `
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prof_Nom</th>
-                <th>Groups</th>
-                <th>Options</th>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                            <th>Prof_Nom</th>
+                            <th>Groups</th>
+                            <th>Options</th>
 
-                `;
+                            `;
 
                         const tableBody = document.querySelector('#dataTable tbody');
                         tableBody.innerHTML = ''; // Réinitialiser le contenu du tableau
@@ -870,6 +878,7 @@
                 <td class="text-center border">${item.id}</td>
                 <td class="text-center border">${item.nom}</td>
                 <td class="text-center border">${item.description}</td>
+                <td class="text-center border" style="white-space: nowrap;">${item.prix ? item.prix : '00'} Dh</td>
                 <td class="text-center border">${item.prof.nom}</td>
                 <td class="text-center border">${groupesNames}</td>
                 <td class="text-center border ">
@@ -880,7 +889,7 @@
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    onclick="openUpdateMatiereForm(${item.id}, '${item.nom}', '${item.description}', ${item.prof_id}, '${groupesNames}');">
+                    onclick="openUpdateMatiereForm(${item.id}, '${item.nom}', '${item.description}', '${item.prof_id}','${item.prix}', '${groupesNames}');">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                     </svg>
 
@@ -899,11 +908,12 @@
                     }
 
                     // Fonction pour afficher le formulaire de mise à jour de la matière avec les données existantes
-                    function openUpdateMatiereForm(id, nom, description, prof_id, groupesNames) {
+                    function openUpdateMatiereForm(id, nom, description, prof_id, prix, groupesNames) {
                         // Remplir le formulaire avec les données de la matière sélectionnée
                         document.getElementById('matiere_id').value = id;
                         document.getElementById('nom_matiere').value = nom;
                         document.getElementById('description').value = description;
+                        document.getElementById('prix').value = prix;
                         document.getElementById('prof_id_matiere').value = prof_id;
 
                         // Récupérer la liste des groupes depuis l'API
@@ -960,6 +970,7 @@
                         // Récupérer les valeurs des autres champs du formulaire
                         const nom = document.getElementById('nom_matiere').value;
                         const description = document.getElementById('description').value;
+                        const prix = document.getElementById('prix').value;
                         const prof_id = document.getElementById('prof_id_matiere').value;
 
                         // Récupérer les groupes sélectionnés
@@ -970,6 +981,7 @@
                         const data = {
                             nom: nom,
                             description: description,
+                            prix: prix,
                             prof_id: prof_id,
                             groupes: selectedGroupes
                         };

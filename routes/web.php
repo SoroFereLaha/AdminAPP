@@ -18,6 +18,7 @@ use App\Http\Controllers\TeacherTimetableController;
 */
 
 Route::get('/admin/users/secretariats/Absences',[SecretariatController::class, 'index'] )->name('admin.users.secretariats.Absences');
+Route::get('/admin/users/secretariats/payements',[SecretariatController::class, 'payements'] )->name('admin.users.secretariats.payements');
 Route::get('/admin/users/secretariats/inscriptions', [SecretariatController::class, 'inscrit'])->name('admin.users.secretariats.inscriptions');
 Route::get('/admin/users/secretariats/formEtudiant', [SecretariatController::class, 'ajoutEt'])->name('admin.users.secretariats.formEtudiant');
 Route::get('/admin/users/secretariats/formProf', [SecretariatController::class, 'ajoutProf'])->name('admin.users.secretariats.formProf');

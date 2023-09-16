@@ -58,6 +58,13 @@
                             <input type="text" id="description" name="description" value="" class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
                         </div>
                         <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="prix">Prix :</label>
+                            <div class="flex">
+                                <input type="number" id="prix" name="prix" min="0" class="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+                                <span class="ml-2">Dh</span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
                             <div class="mb-4">
                                 <label class="block text-gray-700 font-bold mb-2">Groupes :</label>
                                 <select id="groupesSelect" name="groupes[]" multiple class="border border-gray-300 rounded-md px-3 py-2 w-full focus:outline-none focus:ring focus:border-blue-300">
@@ -132,6 +139,7 @@
                 const data = {
                     nom: formData.get('nom'),
                     description: formData.get('description'),
+                    prix: formData.get('prix'),
                     prof_id: parseInt(formData.get('prof_id')),
                     groupes: selectedGroupes,
                 };
@@ -153,7 +161,7 @@
 
                     if (response.ok) {
                         showAlert('Nouvelle matière ajoutée avec succès!', 'success');
-                    
+
                     } else {
                         showAlert("le prof que vous avez spécifier n'existe pas", 'error');
                     }

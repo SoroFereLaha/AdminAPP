@@ -76,6 +76,7 @@ class MatieresController extends Controller
             $post->nom = $request->nom;
             $post->prof_id = $request->prof_id;
             $post->description = $request->description;
+            $post->prix = $request->prix;
 
             if ($post->save()) {
                 if ($request->has('groupes')) {
@@ -104,6 +105,7 @@ class MatieresController extends Controller
             $post->nom = $request->nom;
             $post->prof_id = $request->prof_id;
             $post->description = $request->description;
+            $post->prix = $request->prix;
 
             if ($request->has('groupes')) {
                 $post->groupes()->sync($request->groupes);
