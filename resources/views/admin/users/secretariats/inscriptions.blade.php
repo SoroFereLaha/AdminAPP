@@ -52,9 +52,9 @@
 
 
 
-                <div class="flex items-center my-10">
+                <div class="flex flex-col md:flex-row items-center my-10">
 
-                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-blue-100 w-80 h-50 mx-3">
+                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-blue-100 w-80 h-50 my-3 mx-2 mb-3 md:mb-0">
                         <div class="haut my-5 flex">
 
                             <span class="font-black mx-20 flex ">
@@ -84,7 +84,7 @@
 
 
 
-                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-indigo-100 w-80 h-50 mx-2">
+                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-indigo-100 w-80 h-50 my-2 mx-2 mb-3 md:mb-0">
                         <div class="haut my-5 flex ">
 
                             <span class="font-black mx-20 flex ">
@@ -115,7 +115,7 @@
 
 
 
-                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-violet-100 w-80 h-50 mx-3">
+                    <div class="container shadow-lg  ring ring-blue-400  ring-offset-4 rounded-lg  bg-violet-100 w-80 h-50 my-2 mx-2 mb-3 md:mb-0">
                         <div class="haut my-5 flex ">
 
                             <span class="font-black mx-20 flex ">

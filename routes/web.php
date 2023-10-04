@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministrationController;
 use App\Http\Controllers\SecretariatController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,10 @@ Route::get('/admin/users/secretariats/inscriptions', [SecretariatController::cla
 Route::get('/admin/users/secretariats/formEtudiant', [SecretariatController::class, 'ajoutEt'])->name('admin.users.secretariats.formEtudiant');
 Route::get('/admin/users/secretariats/formProf', [SecretariatController::class, 'ajoutProf'])->name('admin.users.secretariats.formProf');
 Route::get('/admin/users/secretariats/formMatière', [SecretariatController::class, 'ajoutMatière'])->name('admin.users.secretariats.formMatière');
+
+
+Route::get('/admin/users/administration/convocation', [AdministrationController::class, 'index'])->name('admin.users.administration.convocation');
+Route::get('/admin/users/administration/examens', [AdministrationController::class, 'examens'])->name('admin.users.administration.examens');
 
 Route::get('/', function () {
     return view('welcome');

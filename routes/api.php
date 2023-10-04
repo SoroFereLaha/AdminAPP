@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AbsencesControlle;
 use App\Http\Controllers\Api\EtudiantController;
+use App\Http\Controllers\Api\ExamensController;
 use App\Http\Controllers\Api\GroupesControlle;
 use App\Http\Controllers\Api\MatieresController;
 use App\Http\Controllers\Api\PayementController;
@@ -74,6 +75,11 @@ Route::get('payement', [PayementController::class, 'index']);
 Route::get('/payement/{etudiantId}', [PayementController::class, 'listByStudent']);
 Route::post('payement/create', [PayementController::class, 'store']);
 Route::put('payement/edit/{id}', [PayementController::class, 'update']);
+
+//les examens
+Route::get('examens', [ExamensController::class, 'index']);
+Route::post('examens/create', [ExamensController::class, 'store']);
+Route::delete('examens/{post}', [ExamensController::class, 'delete']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

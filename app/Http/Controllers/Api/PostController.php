@@ -32,8 +32,6 @@ class PostController extends Controller
     public function store(CreatePostRequest $request)
     {
 
-
-
         try {
             $post = new pos();
             $post->titre = $request->titre;

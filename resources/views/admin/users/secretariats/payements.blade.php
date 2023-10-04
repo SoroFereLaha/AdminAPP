@@ -357,7 +357,48 @@
 
                 function validatePayment() {
                     console.log(paymentData);
+                    // Parcourez chaque paiement dans paymentData
+                    for (const paymentId in paymentData) {
+                        if (paymentData.hasOwnProperty(paymentId)) {
+                            const paymentDataToUpdate = paymentData[paymentId];
+
+                            // Vérifiez si paymentDataToUpdate contient les données nécessaires
+                            if (!paymentDataToUpdate || !paymentDataToUpdate.inputValue || !paymentDataToUpdate.reste_x) {
+                                console.error(`Payment data for paymentId ${paymentId} is incomplete or missing.`);
+                                continue; // Passez au paiement suivant
+                            }
+
+                            const apiUrl = `http://127.0.0.1:8000/api/payement/edit/${paymentId}`;
+                            const requestData = {
+                                somme_payer: paymentDataToUpdate.inputValue.toFixed(2), // Formatez la valeur en tant que décimal avec deux chiffres après la virgule
+                                reste: paymentDataToUpdate.reste_x.toFixed(2) // Formatez la valeur en tant que décimal avec deux chiffres après la virgule
+                            };
+
+                            // Envoyez une requête PATCH à l'API pour mettre à jour le paiement
+                            fetch(apiUrl, {
+                                    method: 'PUT',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify(requestData)
+                                })
+                                .then(response => response.json())
+                                .then(result => {
+                                    if (result.status_code === 200) {
+                                        console.log(`Payment with ID ${paymentId} has been updated successfully.`);
+                                        // Mettez à jour les données locales si nécessaire
+                                    } else {
+                                        console.error(`Error updating payment with ID ${paymentId}: ${result.status_message}`);
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error(`Error updating payment with ID ${paymentId}: ${error}`);
+                                });
+                        }
+                    }
+                    closeStudentDetails();
                 }
+
 
 
 
@@ -430,15 +471,14 @@
                             console.log('Réponse de l\'API:', data);
                             // Réponse de l'API (peut contenir un message de succès ou d'erreur)
                             if (data.status_code === 200) {
-
                                 console.log('Paiement créé avec succès:', data.message);
-                                showAlert('Nouveau payement ajoutée avec succès!', 'success');
-
-
+                                showAlert('Nouveau paiement ajouté avec succès!', 'success');
+                            } else if (data.status_code === 400) {
+                                console.error('Erreur lors de la création du paiement:', data.status_message);
+                                showAlert(data.status_message, 'error');
                             } else {
-
                                 console.error('Erreur lors de la création du paiement:', data.error);
-                                showAlert("Veuillez remplir tous les champs du formulaire. ", 'error')
+                                showAlert("Veuillez remplir tous les champs du formulaire.", 'error');
                             }
                         })
                         .catch(error => {
@@ -468,7 +508,7 @@
                     // Supprimer l'alerte après un certain délai (5 secondes dans cet exemple)
                     setTimeout(() => {
                         alertElement.remove();
-                    }, 5000);
+                    }, 6000);
                 }
 
 
